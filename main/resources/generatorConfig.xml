@@ -60,30 +60,10 @@
         </javaClientGenerator>
 
         <!-- 数据库中的表要进行反射的Mapping的表 -->
-        <table tableName="user" domainObjectName="User"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-        <table tableName="_type" domainObjectName="Type"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-        <table tableName="article" domainObjectName="Article"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-        <table tableName="movies" domainObjectName="Movies"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-        <table tableName="review" domainObjectName="Review"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+        <table tableName="user" domainObjectName="User"/>
+        <table tableName="_type" domainObjectName="Type"/>
+        <table tableName="article" domainObjectName="Article"/>
+        <table tableName="movies" domainObjectName="Movies"/>
+        <table tableName="review" domainObjectName="Review"/>
     </context>
 </generatorConfiguration>
