@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.belong.dao.MoviesMapper" >
+  <resultMap id="BaseResultMap" type="com.belong.model.Movies" >
+    <constructor >
+      <idArg column="Vid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Vname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Vdate" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="views" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.belong.model.MoviesWithBLOBs" >
+    <constructor >
+      <idArg column="Vid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Vname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Vdate" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="views" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="Vinfo" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="Vpic" jdbcType="LONGVARBINARY" javaType="_byte[]" />
+      <arg column="Vsrc" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Vid, Vname, Vdate, id, views
+  </sql>
+  <sql id="Blob_Column_List" >
+    Vinfo, Vpic, Vsrc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from movies
+    where Vid = #{vid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from movies
+    where Vid = #{vid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.belong.model.MoviesWithBLOBs" >
+    insert into movies (Vid, Vname, Vdate, 
+      id, views, Vinfo, 
+      Vpic, Vsrc)
+    values (#{vid,jdbcType=INTEGER}, #{vname,jdbcType=VARCHAR}, #{vdate,jdbcType=DATE}, 
+      #{id,jdbcType=INTEGER}, #{views,jdbcType=DECIMAL}, #{vinfo,jdbcType=LONGVARCHAR}, 
+      #{vpic,jdbcType=LONGVARBINARY}, #{vsrc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.belong.model.MoviesWithBLOBs" >
+    insert into movies
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        Vid,
+      </if>
+      <if test="vname != null" >
+        Vname,
+      </if>
+      <if test="vdate != null" >
+        Vdate,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="views != null" >
+        views,
+      </if>
+      <if test="vinfo != null" >
+        Vinfo,
+      </if>
+      <if test="vpic != null" >
+        Vpic,
+      </if>
+      <if test="vsrc != null" >
+        Vsrc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="vname != null" >
+        #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vdate != null" >
+        #{vdate,jdbcType=DATE},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="views != null" >
+        #{views,jdbcType=DECIMAL},
+      </if>
+      <if test="vinfo != null" >
+        #{vinfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="vpic != null" >
+        #{vpic,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="vsrc != null" >
+        #{vsrc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.belong.model.MoviesWithBLOBs" >
+    update movies
+    <set >
+      <if test="vname != null" >
+        Vname = #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vdate != null" >
+        Vdate = #{vdate,jdbcType=DATE},
+      </if>
+      <if test="id != null" >
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="views != null" >
+        views = #{views,jdbcType=DECIMAL},
+      </if>
+      <if test="vinfo != null" >
+        Vinfo = #{vinfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="vpic != null" >
+        Vpic = #{vpic,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="vsrc != null" >
+        Vsrc = #{vsrc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.belong.model.MoviesWithBLOBs" >
+    update movies
+    set Vname = #{vname,jdbcType=VARCHAR},
+      Vdate = #{vdate,jdbcType=DATE},
+      id = #{id,jdbcType=INTEGER},
+      views = #{views,jdbcType=DECIMAL},
+      Vinfo = #{vinfo,jdbcType=LONGVARCHAR},
+      Vpic = #{vpic,jdbcType=LONGVARBINARY},
+      Vsrc = #{vsrc,jdbcType=LONGVARCHAR}
+    where Vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.belong.model.Movies" >
+    update movies
+    set Vname = #{vname,jdbcType=VARCHAR},
+      Vdate = #{vdate,jdbcType=DATE},
+      id = #{id,jdbcType=INTEGER},
+      views = #{views,jdbcType=DECIMAL}
+    where Vid = #{vid,jdbcType=INTEGER}
+  </update>
+</mapper>

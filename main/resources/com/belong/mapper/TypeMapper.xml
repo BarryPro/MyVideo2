@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.belong.dao.TypeMapper" >
+  <resultMap id="BaseResultMap" type="com.belong.model.Type" >
+    <constructor >
+      <idArg column="Vid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Tid" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Vid, Tid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from _type
+    where Vid = #{vid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from _type
+    where Vid = #{vid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.belong.model.Type" >
+    insert into _type (Vid, Tid)
+    values (#{vid,jdbcType=INTEGER}, #{tid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.belong.model.Type" >
+    insert into _type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        Vid,
+      </if>
+      <if test="tid != null" >
+        Tid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.belong.model.Type" >
+    update _type
+    <set >
+      <if test="tid != null" >
+        Tid = #{tid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.belong.model.Type" >
+    update _type
+    set Tid = #{tid,jdbcType=VARCHAR}
+    where Vid = #{vid,jdbcType=INTEGER}
+  </update>
+</mapper>

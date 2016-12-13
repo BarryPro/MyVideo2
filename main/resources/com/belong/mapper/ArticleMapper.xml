@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.belong.dao.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.belong.model.Article" >
+    <constructor >
+      <idArg column="Aid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Uid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Arootid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Adate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="Vid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.belong.model.Article" >
+    <constructor >
+      <idArg column="Aid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Uid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Arootid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Adate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="Vid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Acontent" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Aid, Uid, Arootid, Adate, Vid
+  </sql>
+  <sql id="Blob_Column_List" >
+    Acontent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where Aid = #{aid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from article
+    where Aid = #{aid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.belong.model.Article" >
+    insert into article (Aid, Uid, Arootid, 
+      Adate, Vid, Acontent
+      )
+    values (#{aid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{arootid,jdbcType=INTEGER}, 
+      #{adate,jdbcType=TIMESTAMP}, #{vid,jdbcType=INTEGER}, #{acontent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.belong.model.Article" >
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aid != null" >
+        Aid,
+      </if>
+      <if test="uid != null" >
+        Uid,
+      </if>
+      <if test="arootid != null" >
+        Arootid,
+      </if>
+      <if test="adate != null" >
+        Adate,
+      </if>
+      <if test="vid != null" >
+        Vid,
+      </if>
+      <if test="acontent != null" >
+        Acontent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aid != null" >
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="arootid != null" >
+        #{arootid,jdbcType=INTEGER},
+      </if>
+      <if test="adate != null" >
+        #{adate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vid != null" >
+        #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="acontent != null" >
+        #{acontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.belong.model.Article" >
+    update article
+    <set >
+      <if test="uid != null" >
+        Uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="arootid != null" >
+        Arootid = #{arootid,jdbcType=INTEGER},
+      </if>
+      <if test="adate != null" >
+        Adate = #{adate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vid != null" >
+        Vid = #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="acontent != null" >
+        Acontent = #{acontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Aid = #{aid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.belong.model.Article" >
+    update article
+    set Uid = #{uid,jdbcType=INTEGER},
+      Arootid = #{arootid,jdbcType=INTEGER},
+      Adate = #{adate,jdbcType=TIMESTAMP},
+      Vid = #{vid,jdbcType=INTEGER},
+      Acontent = #{acontent,jdbcType=LONGVARCHAR}
+    where Aid = #{aid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.belong.model.Article" >
+    update article
+    set Uid = #{uid,jdbcType=INTEGER},
+      Arootid = #{arootid,jdbcType=INTEGER},
+      Adate = #{adate,jdbcType=TIMESTAMP},
+      Vid = #{vid,jdbcType=INTEGER}
+    where Aid = #{aid,jdbcType=INTEGER}
+  </update>
+</mapper>
