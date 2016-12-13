@@ -11,7 +11,7 @@ public class MoviesWithBLOBs extends Movies {
     private String vsrc;
 
     public MoviesWithBLOBs(Integer vid, String vname, Date vdate, Integer id, BigDecimal views, String vinfo, byte[] vpic, String vsrc) {
-
+        super(vid, vname, vdate, id, views);
         this.vinfo = vinfo;
         this.vpic = vpic;
         this.vsrc = vsrc;
