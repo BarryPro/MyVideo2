@@ -1,15 +1,14 @@
-<%--
+<#--
   Created by IntelliJ IDEA.
   User: belong
   Date: 16-11-17
   Time: 下午6:58
   To change this template use File | Settings | File Templates.
---%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+-->
 <div class="signin">
   <div id="small-dialog" class="mfp-hide">
     <h3>登录</h3>
-    <%@include file="../common/left_page.ftl"%>
+    <#include "../common/left_page.ftl">
     <div class="signup">
       <form method="post" id="l_form" action="UserControl">
         <input type="text" class="email" placeholder="用户名" name="username" id="username"/>

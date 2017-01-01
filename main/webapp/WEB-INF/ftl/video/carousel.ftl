@@ -1,14 +1,13 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>jQuery带播放暂停按钮焦点图代码</title>
 
-<link rel="stylesheet" type="text/css" href="css/jquery.slider.css" />
+<link rel="stylesheet" type="text/css" href="${mypath}/css/jquery.slider.css" />
 
-<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="js/jquery.slider.min.js"></script>
+<script type="text/javascript" src="${mypath}/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="${mypath}/js/jquery.slider.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function ($) {
 	$(".slider").slideshow({
@@ -24,13 +23,13 @@ $(document).ready(function ($) {
 <div style="width:722px;margin:0 auto;">
 	<div class="slider">
 		<span></span>
-		<div><a href="#"><img src="images/10.jpg" alt="" width="722" height="267"></a></div>
-		<div><a href="#"><img src="images/datouwang2.jpg" alt=""></a></div>
-		<div><a href="#"><img src="images/datouwang3.jpg" alt=""></a></div>
-		<div><a href="#"><img src="images/datouwang4.jpg" alt=""></a></div>
-		<div><a href="#"><img src="images/datouwang5.jpg" alt=""></a></div>
-		<div><a href="#"><img src="images/datouwang6.jpg" alt=""></a></div>      
-		<div><a href="#"><img src="images/datouwang7.jpg" alt=""></a></div>
+		<div><a href="#"><img src="${mypath}/images/10.jpg" alt="" width="722" height="267"></a></div>
+		<div><a href="#"><img src="${mypath}/images/datouwang2.jpg" alt=""></a></div>
+		<div><a href="#"><img src="${mypath}/images/datouwang3.jpg" alt=""></a></div>
+		<div><a href="#"><img src="${mypath}/images/datouwang4.jpg" alt=""></a></div>
+		<div><a href="#"><img src="${mypath}/images/datouwang5.jpg" alt=""></a></div>
+		<div><a href="#"><img src="${mypath}/images/datouwang6.jpg" alt=""></a></div>
+		<div><a href="#"><img src="${mypath}/images/datouwang7.jpg" alt=""></a></div>
 	</div>
 </div>
 <div class="modal hide fade" id="post">
@@ -55,7 +54,7 @@ $(document).ready(function ($) {
 					name="add" onclick="add()">灌水</button>	</div>
 	</div>
 
-	<script type="text/javascript" src="ckfinder/ckfinder.js"></script>
+	<script type="text/javascript" src="${mypath}/ckfinder/ckfinder.js"></script>
 	<script type="text/javascript">
 
 	</script>

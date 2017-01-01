@@ -6,4 +6,4 @@
     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another link</a></li>
   </ul>
 </div>
-<script src="js/bootstrap.min.js"></script>
+<script src="${mypath}/js/bootstrap.min.js"></script>

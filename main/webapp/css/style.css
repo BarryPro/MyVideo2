@@ -134,7 +134,7 @@ form.navbar-form.navbar-right {
 }
 ul.nav.nav-sidebar li.active a{
     background-color: #232323 !important;
-    color: #21DEEF;
+    color: #3b3b3b;
 }
 ul.nav.nav-sidebar li a{
     color: #BBBBBB;
@@ -147,7 +147,7 @@ ul.nav.nav-sidebar li a{
 }
 .sidebar ul.nav-sidebar li a:hover{
     background-color: #232323 !important;
-    color: #21DEEF;
+    color: #3b3b3b;
 }
 .sidebar ul.nav-sidebar li.active{
     background-color: #232323 !important;

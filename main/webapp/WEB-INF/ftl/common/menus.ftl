@@ -1,4 +1,4 @@
-<link href="font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<link href="${mypath}/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <div class="col-sm-3 col-md-2 sidebar">
   <div class="top-navigation">
     <div class="t-menu">MENU</div>

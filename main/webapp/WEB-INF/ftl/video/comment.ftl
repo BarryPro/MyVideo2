@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
 <html lang="en">
 <head>
     <title>影视评论</title>
-    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="${mypath}/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="${mypath}/js/jquery-1.11.1.min.js"></script>
+    <link href="${mypath}/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 </head>
 <style>
     ._mycolor{
@@ -52,16 +49,16 @@
     <script type="text/javascript">
         //配置ckeditor
         CKEDITOR.replace('content',{
-            filebrowserBrowseUrl : 'ckfinder/ckfinder.html',
-            filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?type=Images',
-            filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?type=Flash',
-            filebrowserUploadUrl : 'ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl : 'ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Images',
-            filebrowserFlashUploadUrl : 'ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Flash'
+            filebrowserBrowseUrl : '${mypath}/ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl : '${mypath}/ckfinder/ckfinder.html?type=Images',
+            filebrowserFlashBrowseUrl : '${mypath}/ckfinder/ckfinder.html?type=Flash',
+            filebrowserUploadUrl : '${mypath}/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl : '${mypath}/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : '${mypath}/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Flash'
         });
     </script>
 </div>
-<link href="css/diy.css" rel='stylesheet' type='text/css' media="all"/>
+<link href="${mypath}/css/diy.css" rel='stylesheet' type='text/css' media="all"/>
 <div align="center">
     <table width="790px" id="tabelarticle" class="table-striped table-bordered">
         <tr>
@@ -69,7 +66,7 @@
             <td width="10%"><input style="background: chocolate" type="button" id="article" value="   发   表   "/></td>
         </tr>
     </table>
-    <div style="display: none"><%@include file="user.jsp"%></div>
+    <div style="display: none"><#include "video/user.ftl"></div>
     <script>
         $(function(){
             //显示评论信息
