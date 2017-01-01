@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd">
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
     <bean id="validator"
           class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
@@ -16,7 +16,7 @@
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 
         <!-- 以发布到服务器的路径为准-->
-        <property name="basename" value="classpath:messages" />
+        <property name="basename" value="messages" />
         <property name="fileEncodings" value="utf-8" />
         <property name="cacheSeconds" value="120" />
     </bean>
