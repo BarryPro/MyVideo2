@@ -21,9 +21,8 @@
     <!-- 配置freemarker视图解析器 -->
     <bean id="freemarkerSettings"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <!-- 模板文件路径 -->
+        <!-- 模板文件 -->
         <property name="templateLoaderPath" value="/WEB-INF/ftl/" />
-        <!-- freemarker的基本设置 -->
         <property name="freemarkerSettings">
             <props>
                 <prop key="template_update_delay">0</prop>
@@ -35,6 +34,7 @@
                 <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
                 <prop key="date_format">yyyy-MM-dd</prop>
                 <prop key="number_format">#.##</prop>
+
             </props>
         </property>
         <property name="freemarkerVariables">
@@ -53,7 +53,10 @@
         <!-- 模板输出内容的类型及编码问题，防止出现乱码 -->
         <property name="contentType" value="text/html; charset=utf-8" />
         <property name="cache" value="true" />
+
         <property name="order" value="1" />
+
+
         <!-- 将session属性和request属性暴露，以便fm可以访问 -->
         <property name="exposeRequestAttributes" value="true" />
         <property name="exposeSessionAttributes" value="true" />
