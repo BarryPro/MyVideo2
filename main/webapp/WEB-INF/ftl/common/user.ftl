@@ -7,8 +7,7 @@
 -->
 
   <input type="hidden" title="-1" id="my_image"/>
-  <img src="${mypath}/images/login.png" alt="请登录" class="user_avatar myimg" />
-  游客
+
 
 
   <input type="hidden" title="" id="my_image"/>

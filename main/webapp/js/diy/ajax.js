@@ -2,8 +2,6 @@
  * Created by belong on 16-11-4.
  */
 $(document).ready(function () {
-
-
     $("#slider3").responsiveSlides({
         auto: true,
         pager: false,
@@ -43,7 +41,7 @@ $(document).ready(function () {
     });
 
     //登陆
-    $("#mylogin").click(function () {
+    $("#my_login").click(function () {
         $("#l_form").submit();
     });
     //取消提示消息

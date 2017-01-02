@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 @RequestMapping(value = "/my_video")
-@SessionAttributes(value = "user")
+@SessionAttributes(value = "video")
 public class VideoController {
+    //得到主页
     @RequestMapping(value = "/home")
     public String main(){
-        System.out.println("belong");
         return "video/home.ftl";
     }
 }

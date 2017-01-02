@@ -30,6 +30,7 @@
 }
 
 .chk_4 + label:after {
+    font-family: "Adobe 黑体 Std R";
     content: '关';
     position: absolute;
     left: 40px;

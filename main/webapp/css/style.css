@@ -81,7 +81,7 @@ form.navbar-form.navbar-right {
   border-bottom-left-radius: 5px;
 }
 .file a{
-    padding: 8px 20px;
+    padding: 4px 20px;
     background: #F7F7F7;
     color: #272C2E;
     font-size: 14px;
@@ -110,8 +110,8 @@ form.navbar-form.navbar-right {
   margin: 1.1em 0 0 1em;
 }
 .signin a{
-	padding: 8px 20px;
-    background: #21DEEF;
+	padding: 1px 20px;
+    background: #3A3939;
     color: #FFF;
     font-size: 14px;
     text-decoration: none;

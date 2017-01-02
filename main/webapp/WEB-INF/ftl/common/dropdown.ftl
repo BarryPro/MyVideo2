@@ -6,14 +6,14 @@
             <li><a href="#small-dialog" class="play-icon popup-with-zoom-anim">登录</a></li>
             <li><a href="#small-dialog2" class="play-icon popup-with-zoom-anim">注册</a></li>
             <li><a href="#small-dialog3" class="play-icon popup-with-zoom-anim">上传</a></li>
-            <li><a href="UserControl?action=loginout">注销</a></li>
+            <li><a href="UserController?action=loginout">注销</a></li>
             <li><a href="javascript:void(0)" id="dispear">消息</a></li>
             <li>
                 <select name="row" id="my_select">
-                    <option value="3">设置行数/每页</option>
-                    <option value="4">4=========rows</option>
-                    <option value="8">8=========rows</option>
-                    <option value="12">12=========rows</option>
+                    <option value="3">设置</option>
+                    <option value="4">04=rows</option>
+                    <option value="8">08=rows</option>
+                    <option value="12">12=rows</option>
                 </select>
             </li>
         </ul>

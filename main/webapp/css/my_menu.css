@@ -19,7 +19,7 @@
 .menu li {
     border-bottom: 2px solid white;
     border-top: 2px solid white;
-    min-width: 68px;
+    min-width: 80px;
 }
 .menu > li {
     color: black;
@@ -34,14 +34,12 @@
 }
 .menu a {
     border-left: 3px solid rgba(0, 0, 0, 0);
-    color: black;
+    color: white;
     display: block;
     font-family: 'Lucida Console';
     font-size: 14px;
     line-height: 24px;
-    padding: 0 25px;
-    text-decoration: none;
-    text-transform: uppercase;
+    height: 24px;
 }
 
 /* 悬停时的样式 */
