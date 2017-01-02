@@ -23,7 +23,7 @@ nav.navbar.navbar-inverse.navbar-fixed-top {
     top: 80px;
     background: #272c2e;
     border: none;
-    padding: 0 20px 20px 20px;
+    /*padding: 0 20px 20px 20px;*/
 }
 a.navbar-brand h1 {
     margin: 0;
@@ -134,7 +134,7 @@ form.navbar-form.navbar-right {
 }
 ul.nav.nav-sidebar li.active a{
     background-color: #232323 !important;
-    color: #3b3b3b;
+    /*color: #3b3b3b;*/
 }
 ul.nav.nav-sidebar li a{
     color: #BBBBBB;

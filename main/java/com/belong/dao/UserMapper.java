@@ -25,6 +25,7 @@ public interface UserMapper {
 
     User login(@Param("user") User user);
 
+
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
     int updateByExampleWithBLOBs(@Param("record") User record, @Param("example") UserExample example);
