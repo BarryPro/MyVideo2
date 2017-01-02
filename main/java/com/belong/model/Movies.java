@@ -14,18 +14,6 @@ public class Movies {
 
     private BigDecimal views;
 
-    public Movies(Integer vid, String vname, Date vdate, Integer id, BigDecimal views) {
-        this.vid = vid;
-        this.vname = vname;
-        this.vdate = vdate;
-        this.id = id;
-        this.views = views;
-    }
-
-    public Movies() {
-        super();
-    }
-
     public Integer getVid() {
         return vid;
     }

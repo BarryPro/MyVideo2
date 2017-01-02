@@ -7,10 +7,10 @@ import org.apache.commons.fileupload.FileItemIterator;
  * Created by belong on 16-11-5.
  */
 public interface IUserService {
-    public boolean register(User user);
-    public User upLoad(FileItemIterator fii, String tpath);
-    public User login(User user);
-    public byte[] getPic(int id);
-    public String getAuthor(int userid);
-    public boolean updataSelect(int value, int userid);
+    boolean register(User user);
+    User upLoad(FileItemIterator fii, String tpath);
+    User login(User user);
+    byte[] getPic(int id);
+    String getAuthor(int userid);
+    boolean updataSelect(int value, int userid);
 }

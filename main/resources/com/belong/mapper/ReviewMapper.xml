@@ -2,18 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.belong.dao.ReviewMapper" >
   <resultMap id="BaseResultMap" type="com.belong.model.Review" >
-    <constructor >
-      <idArg column="Vid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Vamount" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
+    <id column="Vid" property="vid" jdbcType="INTEGER" />
+    <result column="Vamount" property="vamount" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.belong.model.ReviewWithBLOBs" >
-    <constructor >
-      <idArg column="Vid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Vamount" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="Vdirector" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
-      <arg column="Vactor" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
-    </constructor>
+  <resultMap id="ResultMapWithBLOBs" type="com.belong.model.ReviewWithBLOBs" extends="BaseResultMap" >
+    <result column="Vdirector" property="vdirector" jdbcType="LONGVARCHAR" />
+    <result column="Vactor" property="vactor" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

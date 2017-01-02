@@ -15,19 +15,6 @@ public class Article {
 
     private String acontent;
 
-    public Article(Integer aid, Integer uid, Integer arootid, Date adate, Integer vid, String acontent) {
-        this.aid = aid;
-        this.uid = uid;
-        this.arootid = arootid;
-        this.adate = adate;
-        this.vid = vid;
-        this.acontent = acontent;
-    }
-
-    public Article() {
-        super();
-    }
-
     public Integer getAid() {
         return aid;
     }

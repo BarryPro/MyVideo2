@@ -37,7 +37,7 @@
             <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
             <property name="enableSubPackages" value="false"/>
             <!-- 是否对model添加构造函数 -->
-            <property name="constructorBased" value="true"/>
+            <property name="constructorBased" value="false"/>
             <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
             <property name="trimStrings" value="true"/>
             <!-- 建立的Model对象是否不可改变,即生成的Model对象不会有 setter方法，只有构造方法 -->
@@ -55,7 +55,8 @@
                 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-        <javaClientGenerator targetPackage="com.belong.dao" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.belong.dao"
+                             targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 

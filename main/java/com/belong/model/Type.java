@@ -5,15 +5,6 @@ public class Type {
 
     private String tid;
 
-    public Type(Integer vid, String tid) {
-        this.vid = vid;
-        this.tid = tid;
-    }
-
-    public Type() {
-        super();
-    }
-
     public Integer getVid() {
         return vid;
     }

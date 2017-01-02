@@ -5,16 +5,6 @@ public class ReviewWithBLOBs extends Review {
 
     private String vactor;
 
-    public ReviewWithBLOBs(Integer vid, String vamount, String vdirector, String vactor) {
-        super(vid, vamount);
-        this.vdirector = vdirector;
-        this.vactor = vactor;
-    }
-
-    public ReviewWithBLOBs() {
-        super();
-    }
-
     public String getVdirector() {
         return vdirector;
     }

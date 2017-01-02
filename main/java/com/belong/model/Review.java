@@ -5,15 +5,6 @@ public class Review {
 
     private String vamount;
 
-    public Review(Integer vid, String vamount) {
-        this.vid = vid;
-        this.vamount = vamount;
-    }
-
-    public Review() {
-        super();
-    }
-
     public Integer getVid() {
         return vid;
     }

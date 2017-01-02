@@ -2,25 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.belong.dao.MoviesMapper" >
   <resultMap id="BaseResultMap" type="com.belong.model.Movies" >
-    <constructor >
-      <idArg column="Vid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Vname" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="Vdate" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="views" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-    </constructor>
+    <id column="Vid" property="vid" jdbcType="INTEGER" />
+    <result column="Vname" property="vname" jdbcType="VARCHAR" />
+    <result column="Vdate" property="vdate" jdbcType="DATE" />
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="views" property="views" jdbcType="DECIMAL" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.belong.model.MoviesWithBLOBs" >
-    <constructor >
-      <idArg column="Vid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Vname" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="Vdate" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="views" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="Vinfo" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
-      <arg column="Vpic" jdbcType="LONGVARBINARY" javaType="_byte[]" />
-      <arg column="Vsrc" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
-    </constructor>
+  <resultMap id="ResultMapWithBLOBs" type="com.belong.model.MoviesWithBLOBs" extends="BaseResultMap" >
+    <result column="Vinfo" property="vinfo" jdbcType="LONGVARCHAR" />
+    <result column="Vpic" property="vpic" jdbcType="LONGVARBINARY" />
+    <result column="Vsrc" property="vsrc" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

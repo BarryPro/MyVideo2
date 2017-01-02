@@ -11,18 +11,6 @@ public class User {
 
     private byte[] pic;
 
-    public User(Integer id, String username, String password, Integer pagenum, byte[] pic) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.pagenum = pagenum;
-        this.pic = pic;
-    }
-
-    public User() {
-        super();
-    }
-
     public Integer getId() {
         return id;
     }

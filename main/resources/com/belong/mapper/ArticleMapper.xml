@@ -2,23 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.belong.dao.ArticleMapper" >
   <resultMap id="BaseResultMap" type="com.belong.model.Article" >
-    <constructor >
-      <idArg column="Aid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Uid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Arootid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Adate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="Vid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-    </constructor>
+    <id column="Aid" property="aid" jdbcType="INTEGER" />
+    <result column="Uid" property="uid" jdbcType="INTEGER" />
+    <result column="Arootid" property="arootid" jdbcType="INTEGER" />
+    <result column="Adate" property="adate" jdbcType="TIMESTAMP" />
+    <result column="Vid" property="vid" jdbcType="INTEGER" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.belong.model.Article" >
-    <constructor >
-      <idArg column="Aid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Uid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Arootid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Adate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="Vid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="Acontent" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
-    </constructor>
+  <resultMap id="ResultMapWithBLOBs" type="com.belong.model.Article" extends="BaseResultMap" >
+    <result column="Acontent" property="acontent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

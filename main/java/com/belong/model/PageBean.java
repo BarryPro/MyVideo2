@@ -1,5 +1,8 @@
 package com.belong.model;
 
+/**
+ * Created by belong on 2017/1/2.
+ */
 import java.io.Serializable;
 import java.util.ArrayList;
 
