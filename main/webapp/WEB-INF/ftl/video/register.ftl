@@ -1,6 +1,6 @@
 <div id="small-dialog2" class="mfp-hide">
     <h3>注册</h3>
-<#include "common/left_page.ftl">
+    <#include "common/left_page.ftl">
     <div class="signup">
         <form id="r_form" method="post" enctype="multipart/form-data" action="UserControl">
             <input type="text" class="email" placeholder="用户名" name="rusername" id="rusername"/>

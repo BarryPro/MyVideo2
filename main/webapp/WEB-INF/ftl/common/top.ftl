@@ -1,5 +1,6 @@
 <script type="text/javascript" src="${mypath}/js/modernizr.custom.min.js"></script>
 <link href="${mypath}/css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="${mypath}/css/diy.css" rel="stylesheet" type="text/css" media="all"/>
 <script src="${mypath}/js/jquery.magnific-popup.js" type="text/javascript"></script>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
