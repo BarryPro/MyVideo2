@@ -18,6 +18,13 @@
           password=#{user.password,jdbcType=VARCHAR}
   </select>
 
+  <insert id="register" parameterType="map">
+    INSERT INTO USER (username,password,pic)
+    VALUES (#{user.username,jdbcType=VARCHAR},
+            #{user.password,jdbcType=VARCHAR},
+            #{user.pic,jdbcType=LONGVARBINARY})
+  </insert>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

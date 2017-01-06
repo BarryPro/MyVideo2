@@ -3,6 +3,7 @@
 <link href="${mypath}/css/diy.css" rel="stylesheet" type="text/css" media="all"/>
 <script src="${mypath}/js/jquery.magnific-popup.js" type="text/javascript"></script>
 <nav class="navbar navbar-inverse navbar-fixed-top">
+    <input type="hidden" id="_path" value="${mypath}"/>
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.belong.dao.PageMapper">
+    <select id="getInfo" statementType="CALLABLE"
+            parameterType="map"
+            resultType="com.belong.model.Movies"
+            resultMap="com.belong.dao.MoviesMapper.BaseResultMap">
+
+        <![CDATA[
+
+          call pro_pagenum1(
+            #{Vtype , mode=IN ,jdbcType=INTEGER},
+	        #{cur_page ,mode=IN ,jdbcType=INTEGER},
+	        #{Uid,  mode=IN ,jdbcType=INTEGER},
+	        #{row_num , mode=OUT ,jdbcType=INTEGER},
+	        #{row_total ,mode=OUT ,jdbcType=INTEGER},
+	        #{page_total,  mode=OUT ,jdbcType=INTEGER}
+          )
+
+        ]]>
+    </select>
+</mapper>

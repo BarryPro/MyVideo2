@@ -15,9 +15,10 @@ $(document).ready(function () {
             $('.events').append("<li>after event fired.</li>");
         }
     });
-//从cookie中得到用户参数
+    //从cookie中得到用户参数
     cookies();
 
+    //用户注册
     $("#register").click(function () {
         //注册检测&&提交
         if ($("#rusername").val() == '') {
@@ -44,10 +45,12 @@ $(document).ready(function () {
     $("#my_login").click(function () {
         $("#l_form").submit();
     });
+
     //取消提示消息
     $("#dispear").click(function () {
         $("#label1").attr("style", "display:none");
     });
+
     //上传电影
     $("#upload").click(function () {
         if($("#vname").val()== ''){
@@ -79,6 +82,7 @@ $(document).ready(function () {
 
     //得到数据库信息
     ajax_page(0,1);
+
     //得到电影
     $("#movie").click(function(){
         var n = 2;
@@ -121,7 +125,9 @@ $(document).ready(function () {
         var txt = $("#txt").val();
         txt_search(userid,cur,txt);
     })
+
     //获取访客
+
     vister();
     //处理页面布局
     $("#my_select").change(function () {
@@ -137,12 +143,14 @@ $(document).ready(function () {
             }
         });
     })
+
     //处理分页 首页
     $("#header").on('click','#first_page' ,function(){
         var type = $("#type_id").attr("title");
         var cur = $("#first_page").attr("title");
         ajax_page(type,cur);
     });
+
     //处理分页 上一页
     $("#header").on('click','a' ,function(){
         var type = $("#type_id").attr("title");
@@ -152,6 +160,7 @@ $(document).ready(function () {
             ajax_page(type,cur);
         }
     });
+
     //处理分页 下一页
     $("#tail").on('click','a' ,function(){
         var type = $("#type_id").attr("title");
@@ -162,6 +171,7 @@ $(document).ready(function () {
             ajax_page(type,cur);
         }
     });
+
     //处理分页 尾页
     $("#tail").on('click','#last_page' ,function(){
         var type = $("#type_id").attr("title");
@@ -177,13 +187,15 @@ $(document).ready(function () {
     });
 
 });
+
 //获取电影界面
 function movie_page(i,list){
+    _path = $("#_path").attr("value");
     $("#1").append(
         '<div class="col-md-3 resent-grid recommended-grid slider-top-grids">' +
         '<div class="resent-grid-img recommended-grid-img">' +
-        '<a href="VideoControl?action=srcpath&Vid=' + list.id + '">' +
-        '<img width="200px" height="200px" id="views" src="VideoControl?action=pic&Vid=' + list.id + '" alt="tupian" />' +
+        '<a href='+_path+'/my_video/pic/Vid>' +
+        '<img width="200px" height="200px" id="views" src='+_path+'/my_video/pic/Vid/' + list.vid + ' alt="tupian" />' +
         '</a>' +
         '<div class="time"><p>' + list.date + '</p></div>' +
         '</div>' +
@@ -193,7 +205,7 @@ function movie_page(i,list){
         '<ul>' +
         '<li><p class="author author-info"><label id="author">' +
         //获得作者名字
-        '上传者:' + list.user.username +
+        '上传者:' +
         '</label></p></li>' +
         '<li class="right-list">' +
         '<p class="views views-info">' +
@@ -207,8 +219,9 @@ function movie_page(i,list){
 
 //显示电影加分页图标
 function ajax_page(type,cur){
+    _path = $("#_path").attr("value");//得到项目的绝对路径
     $.ajax({
-        url: "VideoControl?action=db_info",
+        url: _path+"/my_video/db_info",
         type: "post",
         data: 'n='+type+'&userid='+$("#my_image").attr("title")+'&cur_page='+cur,
         dataType: "json",
@@ -252,16 +265,14 @@ function page_href(n,data){
 
 //访问者
 function vister(){
+    _path = $("#_path").attr("value");//得到项目的绝对路径
     $.ajax({
-        url:"UserControl?action=vister",
+        url:_path+'/my_user/visitor',
         type:"post",
         success:function(data){
             $("#counter").empty();
             $("#counter").append(
-                '<a href="javascript:void(0)" class="home-icon">'+
-                '<span class="glyphicon glyphicon-home" aria-hidden="true">' +
-                "&nbsp;&nbsp;第"+data+"位访客"+
-                '</span></a>'
+                '&nbsp;&nbsp;第'+data+'位访客'
             );
         }
     });
@@ -307,5 +318,4 @@ function cookies(){
     $("input[name='cookie']").attr("checked", "checked");
 }
 
-//下拉条
 

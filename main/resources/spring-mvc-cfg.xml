@@ -66,4 +66,9 @@
         <!-- 确保在fm中可以以request形式使用该内置对象 -->
         <property name="requestContextAttribute" value="request"/>
     </bean>
+
+    <!-- 控制文件上传(默认是没有限制文件大小的的)-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
 </beans>

@@ -130,5 +130,4 @@
         <aop:advisor pointcut-ref="druid-stat-pointcut"
                      advice-ref="druid-stat-interceptor" />
     </aop:config>
-
 </beans>

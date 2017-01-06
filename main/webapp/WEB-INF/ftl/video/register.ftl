@@ -2,7 +2,7 @@
     <h3>注册</h3>
     <#include "common/left_page.ftl">
     <div class="signup">
-        <form id="r_form" method="post" enctype="multipart/form-data" action="UserControl">
+        <form id="r_form" method="post" enctype="multipart/form-data" action="${mypath}/my_user/register">
             <input type="text" class="email" placeholder="用户名" name="rusername" id="rusername"/>
             <input type="password" placeholder="密码" name="rpassword" id="rpassword"/>
             <input type="password" placeholder="确认密码" id="repwd"/>

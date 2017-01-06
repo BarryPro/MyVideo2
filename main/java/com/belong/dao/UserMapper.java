@@ -25,6 +25,7 @@ public interface UserMapper {
 
     User login(@Param("user") User user);
 
+    boolean register(@Param("user") User user);
 
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 

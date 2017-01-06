@@ -2,8 +2,6 @@ package com.belong.dao;
 
 import com.belong.model.Review;
 import com.belong.model.ReviewExample;
-import com.belong.model.ReviewWithBLOBs;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ReviewMapper {
@@ -13,25 +11,19 @@ public interface ReviewMapper {
 
     int deleteByPrimaryKey(Integer vid);
 
-    int insert(ReviewWithBLOBs record);
+    int insert(Review record);
 
-    int insertSelective(ReviewWithBLOBs record);
+    int insertSelective(Review record);
 
-    List<ReviewWithBLOBs> selectByExampleWithBLOBs(ReviewExample example);
+    int updateByExampleSelective(@Param("record") Review record, @Param("example") ReviewExample example);
 
-    List<Review> selectByExample(ReviewExample example);
-
-    ReviewWithBLOBs selectByPrimaryKey(Integer vid);
-
-    int updateByExampleSelective(@Param("record") ReviewWithBLOBs record, @Param("example") ReviewExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") ReviewWithBLOBs record, @Param("example") ReviewExample example);
+    int updateByExampleWithBLOBs(@Param("record") Review record, @Param("example") ReviewExample example);
 
     int updateByExample(@Param("record") Review record, @Param("example") ReviewExample example);
 
-    int updateByPrimaryKeySelective(ReviewWithBLOBs record);
+    int updateByPrimaryKeySelective(Review record);
 
-    int updateByPrimaryKeyWithBLOBs(ReviewWithBLOBs record);
+    int updateByPrimaryKeyWithBLOBs(Review record);
 
     int updateByPrimaryKey(Review record);
 }
