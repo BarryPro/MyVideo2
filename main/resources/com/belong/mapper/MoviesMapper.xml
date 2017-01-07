@@ -12,7 +12,12 @@
     <result column="Vsrc" property="vsrc" jdbcType="LONGVARCHAR" />
   </resultMap>
 
-  <select id="getPath" resultType="java.lang.String"></select>
+  <select id="getPath" resultType="java.lang.String" parameterType="map">
+    SELECT Vsrc
+    FROM movies
+    WHERE Vid = #{vid,jdbcType=INTEGER}
+  </select>
+
   <select id="getPic" parameterType="map"  resultType="com.belong.model.Movies" resultMap="BaseResultMap">
     SELECT Vpic
     FROM movies
@@ -20,9 +25,13 @@
 
   </select>
 
-  <select id="search" resultType="com.belong.model.PageBean"></select>
   <select id="review" resultType="com.belong.model.Review"></select>
 
-    <update id="upload"></update>
-  <update id="views"></update>
+  <update id="upload"></update>
+
+  <update id="views" parameterType="map" >
+    UPDATE movies
+    SET views = views + 1
+    WHERE Vid = #{vid,jdbcType=INTEGER}
+  </update>
 </mapper>

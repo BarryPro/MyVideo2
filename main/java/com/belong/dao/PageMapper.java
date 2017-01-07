@@ -10,4 +10,5 @@ import java.util.Map;
  */
 public interface PageMapper {
     ArrayList<Movies> getInfo(Map map);
+    ArrayList<Movies> search(Map map);
 }

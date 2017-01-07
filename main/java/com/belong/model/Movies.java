@@ -14,7 +14,7 @@ public class Movies {
 
     private BigDecimal views;
 
-    private byte[] vsrc;
+    private String vsrc;
 
     private byte[] vpic;
 
@@ -22,11 +22,11 @@ public class Movies {
     private String vinfo;//影片信息
     private String  type;//上传的电影类型
 
-    public byte[] getVsrc() {
+    public String getVsrc() {
         return vsrc;
     }
 
-    public void setVsrc(byte[] vsrc) {
+    public void setVsrc(String  vsrc) {
         this.vsrc = vsrc;
     }
 
@@ -61,11 +61,6 @@ public class Movies {
     public void setUser(User user) {
         this.user = user;
     }
-
-
-
-
-
 
     public Integer getVid() {
         return vid;

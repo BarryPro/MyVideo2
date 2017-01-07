@@ -3,11 +3,9 @@ package com.belong.controller;
 import com.belong.encrypt.MD5;
 import com.belong.model.User;
 import com.belong.service.IUserService;
-import org.apache.commons.fileupload.FileItemIterator;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -19,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Map;
 import java.util.Properties;
+
+
 
 /**
  * Created by belong on 2017/1/2.
@@ -42,6 +42,8 @@ public class UserController {
     private static final String SYSTEMSEPARATOR = "/";
     private static final String RFAILED = "对不起，注册失败了，别灰心再重新来一次吧";
     private static final String RSUCCESS = "恭喜你注册成功了，快去登陆吧";
+    private static final String HOME = "video/home.ftl";
+    private static final String IMAGE = "image/jpeg";
 
     @Autowired
     private IUserService service;
@@ -88,11 +90,11 @@ public class UserController {
         try {
             pro.load(is);
             String counter = pro.get(COUNT).toString();
-            PrintWriter pw = response.getWriter();
+            PrintWriter writer = response.getWriter();
             add();
-            pw.write(counter);
-            pw.flush();
-            pw.close();
+            writer.write(counter);
+            writer.flush();
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -126,30 +128,23 @@ public class UserController {
     @RequestMapping(value = "/register")
     public String register(
                            HttpServletRequest request){
-        //1.得到服务器路径
-        String tpath=request.getServletContext().getRealPath(SYSTEMSEPARATOR);
-        //2.定义临时文件
-        File tmp = new File(TMP);
-        DiskFileItemFactory dfif = new DiskFileItemFactory();
-        dfif.setRepository(tmp);
-        dfif.setSizeThreshold(1024*1024);
-        ServletFileUpload sfu = new ServletFileUpload(dfif);
-        sfu.setFileSizeMax(1024*1024);
-        sfu.setSizeMax(10*1024*1024);
-        try {
-            FileItemIterator fii = sfu.getItemIterator(request);
-            User user = service.upLoad(fii, tpath);
-            String msg = null;
-            if(service.register(user)){//注册成功
-                msg = RSUCCESS;
-            } else {//注册失败
-                msg = RFAILED;
-            }
-            request.setAttribute(MSG,msg);
 
+        return "video/particle.ftl";
+    }
+
+    @RequestMapping(value = "/pic/userid/{uid}")
+    public String getPic(@PathVariable(value = "uid") int uid, HttpServletResponse response){
+        response.setContentType(IMAGE);
+        try {
+            User user = service.getPic(uid);
+            byte[] buffer = user.getPic();
+            OutputStream os = response.getOutputStream();
+            os.write(buffer);
+            os.flush();
+            os.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "video/home.ftl";
+        return null;
     }
 }

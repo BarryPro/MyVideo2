@@ -10,7 +10,7 @@ public interface IUserService {
     boolean register(User user);
     User upLoad(FileItemIterator fii, String tpath);
     User login(User user);
-    byte[] getPic(int id);
+    User getPic(int id);
     String getAuthor(int userid);
     boolean updataSelect(int value, int userid);
 }

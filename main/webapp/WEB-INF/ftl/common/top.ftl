@@ -19,7 +19,7 @@
             <div class="top-search">
                 <form class="navbar-form navbar-right" id="form_search" method="post">
                     <input type="text" class="form-control" placeholder="Search..." id="txt" name="txt">
-                    <input type="submit" value=" " id="btn_search">
+                    <input type="button" value=" " id="btn_search">
                 </form>
                 <div class="signin">
                     <label id="label1" style="color: red"><b><i>${msg}</i></b></label>

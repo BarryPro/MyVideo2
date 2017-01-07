@@ -1,7 +1,6 @@
 package com.belong.service;
 
 import com.belong.model.Movies;
-import com.belong.model.PageBean;
 import com.belong.model.Review;
 import org.apache.commons.fileupload.FileItemIterator;
 
@@ -16,8 +15,8 @@ public interface IMoviesService {
     String getPath(int Vid);
     boolean upload(Review review);
     Movies getPic(int Vid);
-    PageBean search(String txt, int cur_page, int userid);
-    boolean views(int Vid);
+    ArrayList<Movies> search(Map map);
+    void views(int Vid);
     Review review(int Vid);
     ArrayList<Movies> getInfo(Map map);
 }

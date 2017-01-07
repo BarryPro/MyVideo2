@@ -3,7 +3,6 @@ package com.belong.service;
 import com.belong.dao.MoviesMapper;
 import com.belong.dao.PageMapper;
 import com.belong.model.Movies;
-import com.belong.model.PageBean;
 import com.belong.model.Review;
 import org.apache.commons.fileupload.FileItemIterator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,13 +66,13 @@ public class MoviesServiceImpl implements IMoviesService{
     }
 
     @Override
-    public PageBean search(String txt,int cur_page,int userid) {
-        return dao.search(txt,cur_page,userid);
+    public ArrayList<Movies> search(Map map) {
+        return prodao.search(map);
     }
 
     @Override
-    public boolean views(int Vid) {
-        return dao.views(Vid);
+    public void views(int Vid) {
+        dao.views(Vid);
     }
 
     @Override

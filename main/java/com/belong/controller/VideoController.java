@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
 
 /**
  * Created by belong on 2017/1/1.
@@ -31,6 +30,17 @@ public class VideoController {
     private static final String ENCODER = "utf-8";
     private static final String N = "n";
     private static final String IMAGE = "image/jpeg";
+    private static final String HOME = "video/home.ftl";
+    private static final String PLAYER = "video/player.ftl";
+    private static final String SRCPATH = "srcpath";
+    private static final String TXT = "txt";
+
+    private HashMap<String,String> types = new HashMap<String,String>();
+
+    public VideoController(){
+        types.put("video/avi", ".avi");
+        types.put("video/mp4", ".mp4");
+    }
 
     @Autowired
     private IMoviesService service;
@@ -56,33 +66,71 @@ public class VideoController {
         pageBean.setRow_num(map.get("row_num"));
         pageBean.setRow_total(map.get("row_total"));
         pageBean.setPage_total(map.get("page_total"));
+        pageBean.setCur_page(map.get("cur_page"));
         response.setCharacterEncoding(ENCODER);
-        try {
-            String json = JSON.toJSONString(pageBean);
-            PrintWriter pw = response.getWriter();
-            pw.write(json);
-            pw.flush();
-            pw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "video/home.ftl";
+        json(pageBean,response);
+        return HOME;
     }
 
     @RequestMapping(value = "/pic/Vid/{vid}")
     public String getPic(@PathVariable(value = "vid") int vid,HttpServletResponse response){
-
         response.setContentType(IMAGE);
+        OutputStream os = null;
         try {
             Movies movies = service.getPic(vid);
             byte[] buffer = movies.getVpic();
-            ServletOutputStream sos = response.getOutputStream();
-            sos.write(buffer);
-            sos.flush();
-            sos.close();
+            os = response.getOutputStream();
+            os.write(buffer);
+            os.flush();
+            os.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "video/home.ftl";
+        return null;
+    }
+
+    @RequestMapping(value = "/src/Vid/{vid}")
+    public String getPath(@PathVariable(value = "vid") int vid,
+                          Map map){
+        service.views(vid);
+        String srcpath = service.getPath(vid);
+        map.put(SRCPATH,srcpath);
+        return PLAYER;
+    }
+
+    @RequestMapping(value = "/search")
+    public String search(@RequestParam(TXT) String txt,
+                         @RequestParam(CUR_PAGE) int cur_page,
+                         @RequestParam(USERID) int userid,
+                         HttpServletResponse response){
+        Map<String,Object> map = new HashMap();
+        //模糊查询
+        txt = "%"+txt+"%";
+        map.put("txt",txt);
+        map.put("cur_page",cur_page);
+        map.put("Uid",userid);
+        ArrayList<Movies> data = service.search(map);
+        PageBean pageBean = new PageBean();
+        pageBean.setData(data);
+        pageBean.setRow_num((int) map.get("row_num"));
+        pageBean.setRow_total((int) map.get("row_total"));
+        pageBean.setPage_total((int) map.get("page_total"));
+        pageBean.setCur_page((int) map.get("cur_page"));
+        response.setCharacterEncoding(ENCODER);
+        json(pageBean,response);
+        return HOME;
+    }
+
+    //json返回网页信息
+    private void json(PageBean pageBean,HttpServletResponse response){
+        try {
+            String json = JSON.toJSONString(pageBean);
+            PrintWriter writer = response.getWriter();
+            writer.write(json);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

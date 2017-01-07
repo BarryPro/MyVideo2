@@ -3,7 +3,7 @@
     <div class="top-navigation">
         <div class="t-menu">MENU</div>
         <div class="t-img">
-            <img src="images/lines.png" alt=""/>
+            <img src="${mypath}/images/lines.png" alt=""/>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -17,7 +17,7 @@
                 <span class="glyphicon glyphicon-home glyphicon-blackboard" aria-hidden="true"></span>TV</a></li>
             <li><a href="javascript:void(0)" class="menu1" id="movie">
                 <span class="glyphicon glyphicon-film" aria-hidden="true"></span>Movies</a></li>
-            <li><a href="javascript:void(0)" class="menu1" id="sport">
+            <li><a href="javascript:void(0)" class="menu1" id="MV">
                 <span class="glyphicon glyphicon-film glyphicon-king" aria-hidden="true"></span>MV</a></li>
             <li><a href="javascript:void(0)" class="song-icon">
                 <span class="glyphicon glyphicon-music" aria-hidden="true"></span>Songs</a></li>

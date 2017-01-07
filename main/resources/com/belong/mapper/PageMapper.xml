@@ -5,9 +5,7 @@
             parameterType="map"
             resultType="com.belong.model.Movies"
             resultMap="com.belong.dao.MoviesMapper.BaseResultMap">
-
         <![CDATA[
-
           call pro_pagenum1(
             #{Vtype , mode=IN ,jdbcType=INTEGER},
 	        #{cur_page ,mode=IN ,jdbcType=INTEGER},
@@ -16,7 +14,22 @@
 	        #{row_total ,mode=OUT ,jdbcType=INTEGER},
 	        #{page_total,  mode=OUT ,jdbcType=INTEGER}
           )
+        ]]>
+    </select>
 
+    <select id="search" statementType="CALLABLE"
+            parameterType="map"
+            resultType="com.belong.model.Movies"
+            resultMap="com.belong.dao.MoviesMapper.BaseResultMap">
+        <![CDATA[
+          call pro_pagenum2(
+            #{txt , mode=IN ,jdbcType=VARCHAR},
+	        #{cur_page ,mode=IN ,jdbcType=INTEGER},
+	        #{Uid,  mode=IN ,jdbcType=INTEGER},
+	        #{row_num , mode=OUT ,jdbcType=INTEGER},
+	        #{row_total ,mode=OUT ,jdbcType=INTEGER},
+	        #{page_total,  mode=OUT ,jdbcType=INTEGER}
+          )
         ]]>
     </select>
 </mapper>

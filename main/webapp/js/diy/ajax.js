@@ -79,7 +79,6 @@ $(document).ready(function () {
         }
         $("#u_form").submit();
     });
-
     //得到数据库信息
     ajax_page(0,1);
 
@@ -98,8 +97,8 @@ $(document).ready(function () {
         var n = 1;
         ajax_page(n,1);
     });
-    //得到 others
-    $("#sport").click(function(){
+    //得到 MV
+    $("#MV").click(function(){
         var n = 3;
         ajax_page(n,1);
     });
@@ -115,15 +114,17 @@ $(document).ready(function () {
         var userid = $("#my_image").attr("title");
         var cur = $("#cur_page").attr("title");
         var txt = $("#txt").val();
-        txt_search(userid,cur,txt);
+        var type = $("#type_id").attr("value");
+        txt_search(userid,cur,txt,type);
     });
 
     //改变查找
     $("#txt").keyup(function(){
+        var type = $("#type_id").attr("value");
         var userid = $("#my_image").attr("title");
         var cur = $("#cur_page").attr("title");
         var txt = $("#txt").val();
-        txt_search(userid,cur,txt);
+        txt_search(userid,cur,txt,type);
     })
 
     //获取访客
@@ -146,44 +147,72 @@ $(document).ready(function () {
 
     //处理分页 首页
     $("#header").on('click','#first_page' ,function(){
-        var type = $("#type_id").attr("title");
-        var cur = $("#first_page").attr("title");
-        ajax_page(type,cur);
+        var type = $("#type_id").attr("value");
+        var cur = $("#cur_page").attr("title");
+        var userid = $("#my_image").attr("title");
+        var txt = $("#txt").val();
+        if (type == 6) {
+            ajax_page_search(userid, cur, txt,type)
+        } else {
+            ajax_page(type, cur);
+        }
+
     });
 
     //处理分页 上一页
     $("#header").on('click','a' ,function(){
-        var type = $("#type_id").attr("title");
+        var type = $("#type_id").attr("value");
         var cur = $("#cur_page").attr("title");
+        var userid = $("#my_image").attr("title");
+        var txt = $("#txt").val();
         cur--;
-        if(cur >= 1){
+        if(cur >= 1 && type != 6){
             ajax_page(type,cur);
+        } else if(cur >=1 && type == 6){
+            ajax_page_search(userid,cur,txt,type);
         }
     });
 
     //处理分页 下一页
     $("#tail").on('click','a' ,function(){
-        var type = $("#type_id").attr("title");
+        var type = $("#type_id").attr("value");
         var cur = $("#cur_page").attr("title");
         var max = $("#last_page").attr("title");
+        var userid = $("#my_image").attr("title");
+        var txt = $("#txt").val();
         cur++;
-        if(cur <= max){
+        if(cur <= max && type != 6){
             ajax_page(type,cur);
+        } else if (cur <= max && type == 6){
+            ajax_page_search(userid,cur,txt,type);
         }
     });
 
     //处理分页 尾页
     $("#tail").on('click','#last_page' ,function(){
-        var type = $("#type_id").attr("title");
+        var type = $("#type_id").attr("value");
         var cur = $("#last_page").attr("title");
-        ajax_page(type,cur);
+        var userid = $("#my_image").attr("title");
+        var txt = $("#txt").val();
+        if(type == 6){
+             ajax_page_search(userid,cur,txt,type);
+        } else {
+            ajax_page(type,cur);
+        }
+
     });
 
     //处理分页 中间页
     $("#middle").on('click','a',function(){
-        var type = $("#type_id").attr("title");
+        var type = $("#type_id").attr("value");
         var cur = $(this).attr("title");//this就是表示此时点击的那个超链的title了
-        ajax_page(type,cur);
+        var userid = $("#my_image").attr("title");
+        var txt = $("#txt").val();
+        if(type == 6){
+            ajax_page_search(userid,cur,txt,type);
+        } else {
+            ajax_page(type,cur);
+        }
     });
 
 });
@@ -194,7 +223,7 @@ function movie_page(i,list){
     $("#1").append(
         '<div class="col-md-3 resent-grid recommended-grid slider-top-grids">' +
         '<div class="resent-grid-img recommended-grid-img">' +
-        '<a href='+_path+'/my_video/pic/Vid>' +
+        '<a href='+_path+'/my_video/src/Vid/'+list.vid+'>' +
         '<img width="200px" height="200px" id="views" src='+_path+'/my_video/pic/Vid/' + list.vid + ' alt="tupian" />' +
         '</a>' +
         '<div class="time"><p>' + list.date + '</p></div>' +
@@ -242,7 +271,7 @@ function page_href(n,data){
     $("#header").append(
         '<a href="javascript:void(0)" class="previous" title="上一页" id="del_page"><span class="Bg"><b>&nbsp;</b></span></a>' +
         '<a href="javascript:void(0)" class="cur" id="first_page" title="1"><span class="Bg"><b >首页</b></span></a>'+
-        '<label style="display:none" id="type_id" title="'+n+'"></label>'+
+        '<input type="hidden" id="type_id" value="'+n+'" />'+
             //cur_page 用于全局共享当前页（但是当前页是通过middle里面的类标签点击算出来的cur_page只是用来存储）
         '<label style="display:none" id="cur_page" title="'+data.cur_page+'"></label>'
     )
@@ -280,8 +309,9 @@ function vister(){
 
 //搜索引擎
 function txt_search(userid,cur,txt){
+    _path = $("#_path").attr("value");//得到项目的绝对路径
     if($("#txt").val() != ''){
-        var url = "VideoControl?action=search";
+        var url = _path+'/my_video/search';
         var data = 'userid='+userid+'&cur_page='+cur+'&txt='+txt;
         $.ajax({
             url:url,
@@ -292,16 +322,16 @@ function txt_search(userid,cur,txt){
                 for(var j = 1;j<=5;j++){
                     $("#"+j).empty();
                 }
-                if(data != ''){
+                if(data.data != ''){
                     $(data.data).each(function (i, list) {
                         movie_page(i,list);
                     });
-                    page_href(5,data);
+                    page_href(6,data);
                 } else {
                     $("#1").append(
                         '<div align="center">'+
-                        '<label style="color: red"><b>对不起没有找到亲要找到的电影，' +
-                        '我们会尽快为你添加库源的，请先回到主页看看吧！</b></label></div>'
+                        '<label style="color: red"><h3>对不起没有找到亲要找到的电影，' +
+                        '我们会尽快为你添加库源的，请先回到主页看看吧！</h3></label></div>'
                     )
                 }
             }
@@ -316,6 +346,26 @@ function cookies(){
     $("#username").val(username);
     $("#password").val(password);
     $("input[name='cookie']").attr("checked", "checked");
+}
+
+function ajax_page_search(userid,cur,txt,type){
+    _path = $("#_path").attr("value");//得到项目的绝对路径
+    var url = _path+'/my_video/search';
+    var data = 'userid='+userid+'&cur_page='+cur+'&txt='+txt;
+    $.ajax({
+        url:url,
+        type:"post",
+        data: data,
+        dataType: "json",
+        success: function (data) {
+            $("#1").empty();
+            $(data.data).each(function (i, list) {
+                movie_page(i,list);
+            });
+            //分页超链
+            page_href(type,data);
+        }
+    });
 }
 
 

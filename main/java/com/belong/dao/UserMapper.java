@@ -1,41 +1,10 @@
 package com.belong.dao;
 
 import com.belong.model.User;
-import com.belong.model.UserExample;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
 public interface UserMapper {
-    int countByExample(UserExample example);
-
-    int deleteByExample(UserExample example);
-
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    List<User> selectByExampleWithBLOBs(UserExample example);
-
-    List<User> selectByExample(UserExample example);
-
-    User selectByPrimaryKey(Integer id);
-
     User login(@Param("user") User user);
-
     boolean register(@Param("user") User user);
-
-    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") User record, @Param("example") UserExample example);
-
-    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKeyWithBLOBs(User record);
-
-    int updateByPrimaryKey(User record);
+    User getPic(int id);
 }

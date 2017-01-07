@@ -93,8 +93,8 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
-    public byte[] getPic(int id) {
-        return new byte[0];
+    public User getPic(int id) {
+        return dao.getPic(id);
     }
 
     @Override
