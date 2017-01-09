@@ -1,14 +1,14 @@
 package com.belong.service;
 
 import com.belong.model.User;
-import org.apache.commons.fileupload.FileItemIterator;
+
+import java.util.Map;
 
 /**
  * Created by belong on 16-11-5.
  */
 public interface IUserService {
-    boolean register(User user);
-    User upLoad(FileItemIterator fii, String tpath);
+    boolean register(Map map);
     User login(User user);
     User getPic(int id);
     String getAuthor(int userid);

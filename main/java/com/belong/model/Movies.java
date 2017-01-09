@@ -1,14 +1,13 @@
 package com.belong.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class Movies {
     private Integer vid;
 
     private String vname;
 
-    private Date vdate;
+    private String vdate;
 
     private Integer id;
 
@@ -78,11 +77,11 @@ public class Movies {
         this.vname = vname == null ? null : vname.trim();
     }
 
-    public Date getVdate() {
+    public String getVdate() {
         return vdate;
     }
 
-    public void setVdate(Date vdate) {
+    public void setVdate(String vdate) {
         this.vdate = vdate;
     }
 

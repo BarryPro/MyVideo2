@@ -3,8 +3,8 @@
     <#include "common/left_page.ftl">
     <div class="signup">
         <form id="r_form" method="post" enctype="multipart/form-data" action="${mypath}/my_user/register">
-            <input type="text" class="email" placeholder="用户名" name="rusername" id="rusername"/>
-            <input type="password" placeholder="密码" name="rpassword" id="rpassword"/>
+            <input type="text" class="email" placeholder="用户名" name="username" id="rusername"/>
+            <input type="password" placeholder="密码" name="password" id="rpassword"/>
             <input type="password" placeholder="确认密码" id="repwd"/>
             <a href="javascript:;" class="file">选择文件.jpg|.png|.gif|.bmp
                 <input type="file" name="file0" id="file0">

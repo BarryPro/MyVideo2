@@ -56,11 +56,6 @@ public class MoviesServiceImpl implements IMoviesService{
 
 
     @Override
-    public boolean upload(Review review) {
-        return dao.upload(review);
-    }
-
-    @Override
     public Movies getPic(int Vid) {
         return dao.getPic(Vid);
     }
@@ -73,6 +68,11 @@ public class MoviesServiceImpl implements IMoviesService{
     @Override
     public void views(int Vid) {
         dao.views(Vid);
+    }
+
+    @Override
+    public void upload(Map map) {
+        prodao.upload(map);
     }
 
     @Override

@@ -10,7 +10,16 @@
     <result column="Vinfo" property="vinfo" jdbcType="LONGVARCHAR" />
     <result column="Vpic" property="vpic" jdbcType="LONGVARBINARY"/>
     <result column="Vsrc" property="vsrc" jdbcType="LONGVARCHAR" />
+    <association property="user"
+                 column="id"
+                 select="QueryUserByID"/>
   </resultMap>
+
+  <select id="QueryUserByID" resultMap="com.belong.dao.UserMapper.BaseResultMap">
+    SELECT username
+    FROM user
+    WHERE id = #{id,jdbcType=INTEGER}
+  </select>
 
   <select id="getPath" resultType="java.lang.String" parameterType="map">
     SELECT Vsrc
@@ -27,7 +36,6 @@
 
   <select id="review" resultType="com.belong.model.Review"></select>
 
-  <update id="upload"></update>
 
   <update id="views" parameterType="map" >
     UPDATE movies

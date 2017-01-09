@@ -7,11 +7,11 @@
 -->
 
 
-<#if Session["user"]??>
-    <input type="hidden" title="${user.id}" id="my_image"/>
-    <img src="${mypath}/my_user/pic/userid/${user.id}"
+<#if Session["global_user"]??>
+    <input type="hidden" title="${global_user.id}" id="my_image"/>
+    <img src="${mypath}/my_user/pic/userid/${global_user.id}"
          alt="" class="user_avatar myimg" style="border-radius:50%;overflow:hidden"/>
-    <b><i>${user.username}</i></b>
+    <b><i>${global_user.username}</i></b>
 <#else>
     <input type="hidden" title="-1" id="my_image"/>
     <img src="${mypath}/images/login.png"

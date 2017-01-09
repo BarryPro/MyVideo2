@@ -22,7 +22,7 @@
             <li><a href="javascript:void(0)" class="song-icon">
                 <span class="glyphicon glyphicon-music" aria-hidden="true"></span>Songs</a></li>
             <li><a href="javascript:void(0)" class="news-icon" id="news">
-                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>News</a></li>
+                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>Cartoon</a></li>
         </ul>
         <div class="side-bottom">
             <div class="side-bottom-icons">

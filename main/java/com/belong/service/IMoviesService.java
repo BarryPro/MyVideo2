@@ -13,10 +13,10 @@ import java.util.Map;
 public interface IMoviesService {
     Review uploadFile(FileItemIterator fii, String tpath);
     String getPath(int Vid);
-    boolean upload(Review review);
     Movies getPic(int Vid);
     ArrayList<Movies> search(Map map);
     void views(int Vid);
+    void upload(Map map);
     Review review(int Vid);
     ArrayList<Movies> getInfo(Map map);
 }

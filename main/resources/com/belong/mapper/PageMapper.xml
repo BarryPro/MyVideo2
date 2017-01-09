@@ -32,4 +32,20 @@
           )
         ]]>
     </select>
+
+    <insert id="upload" statementType="CALLABLE"
+            parameterType="map">
+        <![CDATA[
+          call pro_upload_movies(
+            #{_Vname , mode=IN ,jdbcType=VARCHAR},
+	        #{_Vinfo ,mode=IN ,jdbcType=LONGVARCHAR},
+	        #{_Vpic,  mode=IN ,jdbcType=LONGVARBINARY},
+	        #{_Vsrc , mode=IN ,jdbcType=LONGVARCHAR},
+	        #{_id ,mode=IN ,jdbcType=INTEGER},
+	        #{_mytype,  mode=IN ,jdbcType=VARCHAR},
+	        #{_Vdirector ,mode=IN ,jdbcType=LONGVARCHAR},
+	        #{_Vactor,  mode=IN ,jdbcType=LONGVARCHAR}
+          )
+        ]]>
+    </insert>
 </mapper>

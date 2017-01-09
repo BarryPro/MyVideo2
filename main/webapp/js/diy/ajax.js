@@ -226,7 +226,7 @@ function movie_page(i,list){
         '<a href='+_path+'/my_video/src/Vid/'+list.vid+'>' +
         '<img width="200px" height="200px" id="views" src='+_path+'/my_video/pic/Vid/' + list.vid + ' alt="tupian" />' +
         '</a>' +
-        '<div class="time"><p>' + list.date + '</p></div>' +
+        '<div class="time"><p>' + list.vdate + '</p></div>' +
         '</div>' +
         '<div class="resent-grid-info recommended-grid-info">' +
         '<h3><a href="VideoControl?action=review&Vid=' + list.id + '" class="title title-info"><b>' +
@@ -234,7 +234,7 @@ function movie_page(i,list){
         '<ul>' +
         '<li><p class="author author-info"><label id="author">' +
         //获得作者名字
-        '上传者:' +
+        '上传者:' + list.user.username +
         '</label></p></li>' +
         '<li class="right-list">' +
         '<p class="views views-info">' +

@@ -3,15 +3,16 @@ package com.belong.controller;
 import com.alibaba.fastjson.JSON;
 import com.belong.model.Movies;
 import com.belong.model.PageBean;
+import com.belong.model.Review;
 import com.belong.service.IMoviesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -34,12 +35,24 @@ public class VideoController {
     private static final String PLAYER = "video/player.ftl";
     private static final String SRCPATH = "srcpath";
     private static final String TXT = "txt";
+    private static final String SYSTEMSEPARATOR = "/";
+    private static final String UPLOAD = "upload";
+    private static final String MOVIES = "movies";
+    private static final String REVIEW = "review";
+    private static final String UPLOADSUCCESS = "上传成功";
+    private static final String UPLOADFAILED = "上传成功";
+    private static final String MSG = "msg";
 
-    private HashMap<String,String> types = new HashMap<String,String>();
+    private HashMap<String,String> typep = new HashMap();
+    private HashMap<String,String> typem = new HashMap();
 
     public VideoController(){
-        types.put("video/avi", ".avi");
-        types.put("video/mp4", ".mp4");
+        typem.put("video/avi", ".avi");
+        typem.put("video/mp4", ".mp4");
+        typep.put("image/jpeg", ".jpg");
+        typep.put("image/png", ".png");
+        typep.put("image/gif", ".gif");
+        typep.put("image/x-ms-bmp", ".bmp");
     }
 
     @Autowired
@@ -124,7 +137,8 @@ public class VideoController {
     //json返回网页信息
     private void json(PageBean pageBean,HttpServletResponse response){
         try {
-            String json = JSON.toJSONString(pageBean);
+            String json = JSON.toJSONString(pageBean,true);
+            //System.out.println(json);
             PrintWriter writer = response.getWriter();
             writer.write(json);
             writer.flush();
@@ -132,5 +146,71 @@ public class VideoController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping(value = "/upload")
+    public String upload(Movies movies,
+                         Review review,
+                         @RequestPart("filem") MultipartFile filem,
+                         @RequestPart("filep") MultipartFile filep,
+                         HttpServletRequest request,
+                         Map map){
+        String pic_type = filep.getContentType();
+        String src_type = filem.getContentType();
+        //符合上传要求才可以进行上传
+        if(typem.containsKey(src_type) && typep.containsKey(pic_type)){
+            //得到服务器的绝对路径eg:D:\IntelliJIDEA\Frame\MyVideo2\target\MyVideo2\
+            String tpath = request.getSession().getServletContext().getRealPath(SYSTEMSEPARATOR);
+            //得到随机的文件名称
+            System.out.println(tpath);
+            UUID fileaname = UUID.randomUUID();
+            String file = "";
+            //处理长传视频
+            if(typem.containsKey(src_type)){
+                file = fileaname+typem.get(src_type);
+                String vsrc = MOVIES+SYSTEMSEPARATOR+file;
+                movies.setVsrc(vsrc);
+                String tarFile = tpath+vsrc;
+                saveFile(filem,tarFile);
+            }
+            //处理上传图片
+            if(typep.containsKey(pic_type)){
+                try {
+                    byte[] vpic = filep.getBytes();
+                    movies.setVpic(vpic);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                file = fileaname+typep.get(pic_type);
+                String uploadpath = UPLOAD+SYSTEMSEPARATOR+file;
+                String tarfile = tpath+uploadpath;
+                saveFile(filep,tarfile);
+            }
+            map.put("_Vname",movies.getVname());
+            map.put("_Vinfo",movies.getVinfo());
+            map.put("_Vpic",movies.getVpic());
+            map.put("_Vsrc",movies.getVsrc());
+            map.put("_id",movies.getId());
+            map.put("_mytype",movies.getType());
+            map.put("_Vdirector",review.getVdirector());
+            map.put("_Vactor",review.getVactor());
+            service.upload(map);
+            map.put(MSG,UPLOADSUCCESS);
+        }
+        return HOME;
+    }
+
+    //保存文件到服务器
+    private boolean saveFile(MultipartFile file,String path){
+        File upload_file = new File(path);
+        if(!upload_file.exists()){
+            upload_file.mkdirs();
+        }
+        try {
+            file.transferTo(upload_file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 }

@@ -2,7 +2,6 @@ package com.belong.model;
 
 public class Review {
     private Integer vid;
-
     private String vamount;
     private Movies video;
     private String vdirector;

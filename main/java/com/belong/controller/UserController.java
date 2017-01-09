@@ -5,19 +5,18 @@ import com.belong.model.User;
 import com.belong.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
+import java.util.UUID;
 
 
 /**
@@ -25,25 +24,38 @@ import java.util.Properties;
  */
 @Controller
 @RequestMapping(value = "/my_user")
-@SessionAttributes(value = "user")
+@SessionAttributes(value = "global_user")
 public class UserController {
     private static final String SUCCESS = "登录成功,欢迎";
     private static final String POST = "光临本站";
     private static final String FAILED = "对不起，登录失败，请注册账号或者密码和账号不一致";
     private static final String LOGOUT = "注销成功";
     private static final String MSG = "msg";
-    private static final String USER = "user";
+    private static final String USER = "global_user";
     private static final String COOKIEUSERNAME = "com.belong.username";
     private static final String COOKIEPASSWORD = "com.belong.password";
     private static final String OFF = "off";
     private static final String FILE = "visitor.txt";
     private static final String COUNT = "count";
-    private static final String TMP = "tmp";
-    private static final String SYSTEMSEPARATOR = "/";
     private static final String RFAILED = "对不起，注册失败了，别灰心再重新来一次吧";
     private static final String RSUCCESS = "恭喜你注册成功了，快去登陆吧";
-    private static final String HOME = "video/home.ftl";
     private static final String IMAGE = "image/jpeg";
+    private static final String UPLAOD = "upload";
+    private static final String SYSTEMSEPARATOR = "/";
+    private static final String HOME = "video/home.ftl";
+    private static final String USERNAME = "username";
+    private static final String PASSWORD = "password";
+    private static final String PIC = "pic";
+
+    private HashMap<String,String> typep = new HashMap();
+    private HashMap<String,String> typem = new HashMap();
+
+    public UserController(){
+        typep.put("image/jpeg", ".jpg");
+        typep.put("image/png", ".png");
+        typep.put("image/gif", ".gif");
+        typep.put("image/x-ms-bmp", ".bmp");
+    }
 
     @Autowired
     private IUserService service;
@@ -72,7 +84,7 @@ public class UserController {
             msg = FAILED;
         }
         map.put(MSG,msg);
-        return "video/home.ftl";
+        return HOME;
     }
 
     @RequestMapping(value = "/logout")
@@ -80,7 +92,7 @@ public class UserController {
         //注销当前的session
         sessionStatus.setComplete();
         map.put(MSG,LOGOUT);
-        return "video/home.ftl";
+        return HOME;
     }
 
     @RequestMapping(value = "/visitor")
@@ -98,10 +110,10 @@ public class UserController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "video/home.ftl";
+        return HOME;
     }
 
-    //添加访客只有登录可以触发
+    //访客加1
     private void add(){
         InputStream is = UserController.class.getClassLoader().getResourceAsStream(FILE);
         Properties pro = new Properties();
@@ -126,10 +138,48 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register")
-    public String register(
-                           HttpServletRequest request){
-
-        return "video/particle.ftl";
+    public String register(User user,
+                           Map map,
+                           HttpServletRequest request,
+                           @RequestPart("file0") MultipartFile file){
+        String postfix = file.getContentType();
+        if(typep.containsKey(postfix)){
+            byte[] pic = null;
+            try {
+                pic = file.getBytes();
+                //Blob blob = Blob.class.;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //1.得到服务器的绝对路径eg:D:\IntelliJIDEA\Frame\MyVideo2\target\MyVideo2\
+            String tpath = request.getSession().getServletContext().getRealPath(SYSTEMSEPARATOR);
+            String targetDIR = tpath+SYSTEMSEPARATOR+UPLAOD;
+            //得到唯一的文件名存放到服务器中
+            UUID filename = UUID.randomUUID();
+            //组装文件名
+            String _file  = filename+typep.get(postfix);
+            String targetFile = targetDIR+SYSTEMSEPARATOR+_file;
+            //得到最终存放的路径
+            File tarFile = new File (targetFile);
+            try {
+                if(!tarFile.exists()){
+                    tarFile.mkdirs();
+                }
+                file.transferTo(tarFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //加密保存
+            user.setPassword(MD5.getMD5(user.getPassword()));
+            user.setPic(pic);
+            map.put("user",user);
+            if(service.register(map)){
+                map.put(MSG,RSUCCESS);
+            } else {
+                map.put(MSG,RFAILED);
+            }
+        }
+        return HOME;
     }
 
     @RequestMapping(value = "/pic/userid/{uid}")
