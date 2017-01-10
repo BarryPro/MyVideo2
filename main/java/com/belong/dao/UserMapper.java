@@ -9,4 +9,5 @@ public interface UserMapper {
     User login(@Param("user") User user);
     boolean register(Map map);
     User getPic(int id);
+    void updateVideoNumber(Map map);
 }

@@ -27,6 +27,11 @@
     SELECT pic
     FROM user
     WHERE id = #{id,jdbcType=INTEGER}
-
   </select>
+
+  <update id="updateVideoNumber" parameterType="map">
+    UPDATE user
+    SET pagenum = #{pagenum,jdbcType=INTEGER}
+    WHERE id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -3,7 +3,7 @@
 <mapper namespace="com.belong.dao.MoviesMapper" >
   <resultMap id="BaseResultMap" type="com.belong.model.Movies" >
     <id column="Vid" property="vid" jdbcType="INTEGER" />
-    <result column="Vname" property="vname" jdbcType="VARCHAR" />
+    <result column="Vname" property="vname" jdbcType="LONGVARCHAR" />
     <result column="Vdate" property="vdate" jdbcType="DATE" />
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="views" property="views" jdbcType="DECIMAL" />
@@ -33,8 +33,6 @@
     WHERE Vid = #{vid,jdbcType=INTEGER}
 
   </select>
-
-  <select id="review" resultType="com.belong.model.Review"></select>
 
 
   <update id="views" parameterType="map" >

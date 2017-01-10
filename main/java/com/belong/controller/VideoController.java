@@ -1,6 +1,7 @@
 package com.belong.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.belong.model.Movies;
 import com.belong.model.PageBean;
 import com.belong.model.Review;
@@ -16,7 +17,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 
 /**
@@ -38,10 +42,9 @@ public class VideoController {
     private static final String SYSTEMSEPARATOR = "/";
     private static final String UPLOAD = "upload";
     private static final String MOVIES = "movies";
-    private static final String REVIEW = "review";
     private static final String UPLOADSUCCESS = "上传成功";
-    private static final String UPLOADFAILED = "上传成功";
     private static final String MSG = "msg";
+    private static final String COMMENT = "video/comment.ftl";
 
     private HashMap<String,String> typep = new HashMap();
     private HashMap<String,String> typem = new HashMap();
@@ -61,7 +64,7 @@ public class VideoController {
     //得到主页
     @RequestMapping(value = "/home")
     public String main(){
-        return "video/home.ftl";
+        return HOME;
     }
 
     @RequestMapping(value = "/db_info")
@@ -135,9 +138,9 @@ public class VideoController {
     }
 
     //json返回网页信息
-    private void json(PageBean pageBean,HttpServletResponse response){
+    protected void json(PageBean pageBean,HttpServletResponse response){
         try {
-            String json = JSON.toJSONString(pageBean,true);
+            String json = JSON.toJSONString(pageBean,SerializerFeature.DisableCircularReferenceDetect);
             //System.out.println(json);
             PrintWriter writer = response.getWriter();
             writer.write(json);
@@ -162,7 +165,7 @@ public class VideoController {
             //得到服务器的绝对路径eg:D:\IntelliJIDEA\Frame\MyVideo2\target\MyVideo2\
             String tpath = request.getSession().getServletContext().getRealPath(SYSTEMSEPARATOR);
             //得到随机的文件名称
-            System.out.println(tpath);
+            //System.out.println(tpath);
             UUID fileaname = UUID.randomUUID();
             String file = "";
             //处理长传视频
@@ -213,4 +216,5 @@ public class VideoController {
         }
         return true;
     }
+
 }

@@ -7,6 +7,7 @@
            autoplay="autoplay" width="1024" height="576" poster="${mypath}/images/loading.gif">
     </video>
 </div>
+
 <script type="text/javascript">
     $(function () {
         if ($("#video_play").attr("src") != "") {

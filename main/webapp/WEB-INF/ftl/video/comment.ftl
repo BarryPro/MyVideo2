@@ -1,22 +1,23 @@
 <html lang="en">
-<head>
-    <title>影视评论</title>
-    <script type="text/javascript" src="${mypath}/ckeditor/ckeditor.js"></script>
-    <script type="text/javascript" src="${mypath}/js/jquery-1.11.1.min.js"></script>
-    <link href="${mypath}/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
-</head>
+<#include "common/header.ftl">
+<#include "common/top.ftl">
 <style>
     ._mycolor{
         color: #adadad;
     }
 </style>
+<#include "video/particle.ftl">
 <body>
+<input type="hidden" id="_path" value="${mypath}"/>
 <c:set var="review" value="${requestScope.review}"></c:set>
-<div align="center">
-    <table width="790px" cellpadding="0" cellspacing="1">
+<div align="center" style="padding-top: inherit">
+    <table width="790px" cellpadding="0" cellspacing="1" border="1">
         <tr>
-            <td rowspan="6" width="28%"><img width="240" height="300" id="_views"
-                 src="VideoControl?action=pic&Vid=${review.vid}" alt="tupian" /></td>
+            <td rowspan="6" width="28%">
+                <a href="${mypath}/my_video/src/Vid/${review.vid}">
+                <img width="240" height="316" id="_views"
+                     src="${mypath}/my_video/pic/Vid/${review.vid}" alt="tupian" /></a>
+            </td>
             <td width="72%"><span class="_mycolor">影片名：</span>${review.video.vname}</td>
         </tr>
         <tr>
@@ -26,10 +27,16 @@
             <td><span class="_mycolor">演员表：</span>${review.vactor}</td>
         </tr>
         <tr>
-            <td><span class="_mycolor">上传时间：</span>${review.video.date}</td>
+            <td><span class="_mycolor">上传时间：</span>${review.video.vdate}</td>
         </tr>
         <tr>
-            <td><span class="_mycolor">影片介绍：</span>${review.video.vinfo}</td>
+            <td><span class="_mycolor">影片介绍：</td>
+        </tr>
+        <tr>
+            <td>
+                <DIV style="overflow-y:scroll; WIDTH:560px;HEIGHT:200px;background-color:white color:black">
+                ${review.video.vinfo}</DIV>
+            </td>
         </tr>
     </table>
 </div>
@@ -66,7 +73,7 @@
             <td width="10%"><input style="background: chocolate" type="button" id="article" value="   发   表   "/></td>
         </tr>
     </table>
-    <div style="display: none"><#include "video/user.ftl"></div>
+    <div style="display: none"><#include "common/user.ftl"></div>
     <script>
         $(function(){
             //显示评论信息
@@ -74,11 +81,12 @@
             $("#article").click(function(){
                //只有登陆的用户才有发评论的资格
                if($("#my_image").attr("title") != -1){
+                   _path = $("#_path").attr("value");
                    $.ajax({
-                       url:'ArticleControl?action=article',
+                       url:_path+'/my_review/add_article',
                        type:'post',
-                       data:'content='+CKEDITOR.instances.content.getData()+
-                       '&userid='+$("#my_image").attr("title")+'&rootid='+0+'&Vid='+
+                       data:'acontent='+CKEDITOR.instances.content.getData()+
+                       '&uid='+$("#my_image").attr("title")+'&arootid='+0+'&Vid='+
                        ${review.vid}+'&cur_page='+$("#max_page_hidden").attr("title"),
                        dataType:'json',
                        success:showArticle
@@ -104,13 +112,16 @@
                 );
                 $("#article_info").empty();
                 $(data.articles).each(function(i,article){
+                    _path = $("#_path").attr("value");
                     $("#article_info").append(
                             '<table id="_table" width="790px" class="table-striped table-bordered">'+
                             '<tr>' +
                                 '<td width="10%">' +
-                                '<div style="width:48px; height:48px; border-radius:50%;overflow: hidden"><img width="48px" height="48px" src="UserControl?action=pic&userid='+article.user.id+'" class="user_avatar" style="width:100% "/></div></td>' +
+                                '<div style="width:48px; height:48px; border-radius:50%;overflow: hidden">' +
+                                '<img width="48px" height="48px" src='+_path+'/my_user/pic/userid/'+article.uid+' class="user_avatar" ' +
+                                'style="width:100% "/></div></td>' +
                                 '<td width="10%">'+article.user.username+'</td>' +
-                                '<td width="40%">'+article.content+'</td>' +
+                                '<td width="40%">'+article.acontent+'</td>' +
                                 '<td width="20%">'+article.adate+'</td>' +
                                 '<td width="20%"><a href="" title="删除本帖"><i class="icon-trash"></i></a></td>' +
                             '</tr>'+
@@ -133,8 +144,9 @@
                 }
             }
             function show_article(n){
+                _path = $("#_path").attr("value");
                 $.ajax({
-                    url:'ArticleControl?action=query',
+                    url:_path+'/my_review/query',
                     type:'post',
                     data:'content='+CKEDITOR.instances.content.getData()+
                     '&userid='+$("#my_image").attr("title")+'&rootid='+0+'&Vid='+

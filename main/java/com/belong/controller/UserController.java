@@ -43,12 +43,9 @@ public class UserController {
     private static final String UPLAOD = "upload";
     private static final String SYSTEMSEPARATOR = "/";
     private static final String HOME = "video/home.ftl";
-    private static final String USERNAME = "username";
-    private static final String PASSWORD = "password";
-    private static final String PIC = "pic";
+    private static final String UPDATE = "修改成功";
 
     private HashMap<String,String> typep = new HashMap();
-    private HashMap<String,String> typem = new HashMap();
 
     public UserController(){
         typep.put("image/jpeg", ".jpg");
@@ -196,5 +193,16 @@ public class UserController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @RequestMapping(value = "/num_setting")
+    public String getSelect(@RequestParam("value") int value,
+                            @RequestParam("userid") int userid,
+                            Map map){
+        map.put("id",userid);
+        map.put("pagenum",value);
+        service.updateVideoNumber(map);
+        map.put(MSG,UPDATE);
+        return HOME;
     }
 }

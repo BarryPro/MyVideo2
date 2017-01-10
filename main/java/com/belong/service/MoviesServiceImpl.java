@@ -2,6 +2,7 @@ package com.belong.service;
 
 import com.belong.dao.MoviesMapper;
 import com.belong.dao.PageMapper;
+import com.belong.dao.ReviewMapper;
 import com.belong.model.Movies;
 import com.belong.model.Review;
 import org.apache.commons.fileupload.FileItemIterator;
@@ -34,6 +35,9 @@ public class MoviesServiceImpl implements IMoviesService{
 
     @Autowired
     private PageMapper prodao;
+
+    @Autowired
+    private ReviewMapper rdao;
 
     public MoviesServiceImpl() {
         types.put("video/x-msvideo", ".avi");
@@ -76,9 +80,10 @@ public class MoviesServiceImpl implements IMoviesService{
     }
 
     @Override
-    public Review review(int Vid) {
-        return dao.review(Vid);
+    public Review review(Map map) {
+        return rdao.review(map);
     }
+
 
     @Override
     public ArrayList<Movies> getInfo(Map map) {

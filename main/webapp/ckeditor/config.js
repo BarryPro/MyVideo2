@@ -27,7 +27,7 @@ CKEDITOR.editorConfig = function( config )
         ['Maximize','ShowBlocks','-','About']
     ];
     //设置ckeditor的款和高
-    config.width = 800;
+    config.width = 814;
     config.height = 80;
     config.toolbarCanCollapse = true;
 

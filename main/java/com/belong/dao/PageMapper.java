@@ -1,5 +1,6 @@
 package com.belong.dao;
 
+import com.belong.model.Article;
 import com.belong.model.Movies;
 
 import java.util.ArrayList;
@@ -12,4 +13,5 @@ public interface PageMapper {
     ArrayList<Movies> getInfo(Map map);
     ArrayList<Movies> search(Map map);
     void upload(Map map);
+    ArrayList<Article> query(Map map);
 }

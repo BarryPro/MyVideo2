@@ -54,4 +54,9 @@ public class UserServiceImpl implements IUserService{
     public boolean updataSelect(int value, int userid) {
         return false;
     }
+
+    @Override
+    public void updateVideoNumber(Map map) {
+        dao.updateVideoNumber(map);
+    }
 }

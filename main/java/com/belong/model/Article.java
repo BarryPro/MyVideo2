@@ -1,7 +1,5 @@
 package com.belong.model;
 
-import java.util.Date;
-
 public class Article {
     private Integer aid;
 
@@ -9,11 +7,21 @@ public class Article {
 
     private Integer arootid;
 
-    private Date adate;
+    private String adate;
 
     private Integer vid;
 
+    private User user;
+
     private String acontent;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getAid() {
         return aid;
@@ -39,11 +47,11 @@ public class Article {
         this.arootid = arootid;
     }
 
-    public Date getAdate() {
+    public String getAdate() {
         return adate;
     }
 
-    public void setAdate(Date adate) {
+    public void setAdate(String adate) {
         this.adate = adate;
     }
 

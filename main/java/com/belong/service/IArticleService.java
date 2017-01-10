@@ -1,12 +1,14 @@
 package com.belong.service;
 
 import com.belong.model.Article;
-import com.belong.model.PageBean;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by belong on 16-11-16.
  */
 public interface IArticleService {
-    public boolean insertArticle(Article article);
-    public PageBean queryArticle(int userid, int vid, int curpage);
+    void addArticle(Map map);
+    ArrayList<Article> queryArticle(Map map);
 }

@@ -37,7 +37,7 @@
             parameterType="map">
         <![CDATA[
           call pro_upload_movies(
-            #{_Vname , mode=IN ,jdbcType=VARCHAR},
+            #{_Vname , mode=IN ,jdbcType=LONGVARCHAR},
 	        #{_Vinfo ,mode=IN ,jdbcType=LONGVARCHAR},
 	        #{_Vpic,  mode=IN ,jdbcType=LONGVARBINARY},
 	        #{_Vsrc , mode=IN ,jdbcType=LONGVARCHAR},
@@ -48,4 +48,20 @@
           )
         ]]>
     </insert>
+
+    <select id="query" statementType="CALLABLE"
+            parameterType="map"
+            resultType="com.belong.model.Article"
+            resultMap="com.belong.dao.ArticleMapper.BaseResultMap">
+        <![CDATA[
+          call pro_pagenum3(
+            #{Uid , mode=IN ,jdbcType=INTEGER},
+	        #{a_Vid ,mode=IN ,jdbcType=INTEGER},
+	        #{cur_page,  mode=IN ,jdbcType=INTEGER},
+	        #{page_total , mode=OUT ,jdbcType=INTEGER},
+	        #{row_total ,mode=OUT ,jdbcType=INTEGER},
+	        #{a_pagenum,  mode=OUT ,jdbcType=INTEGER}
+          )
+        ]]>
+    </select>
 </mapper>

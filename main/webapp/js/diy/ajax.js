@@ -130,10 +130,12 @@ $(document).ready(function () {
     //获取访客
 
     vister();
+
     //处理页面布局
     $("#my_select").change(function () {
+        _path = $("#_path").attr("value");
         $.ajax({
-            url: 'UserControl?action=my_select',
+            url: _path+'/my_user/num_setting',
             type: "post",
             data: 'value=' + $("#my_select").val() + '&userid=' + $("#my_image").attr("title"),
             dataType: "text",
@@ -229,7 +231,7 @@ function movie_page(i,list){
         '<div class="time"><p>' + list.vdate + '</p></div>' +
         '</div>' +
         '<div class="resent-grid-info recommended-grid-info">' +
-        '<h3><a href="VideoControl?action=review&Vid=' + list.id + '" class="title title-info"><b>' +
+        '<h3><a href='+_path+'/my_review/review/Vid/' + list.vid + ' class="title title-info"><b>' +
         list.vname + '</b><br/>简介：' + list.vinfo + '</a></h3>' +
         '<ul>' +
         '<li><p class="author author-info"><label id="author">' +
