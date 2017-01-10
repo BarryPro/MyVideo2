@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/my_review")
+@SessionAttributes(value = "review")
 public class ArticleController {
     private static final String COMMENT = "video/comment.ftl";
     private static final String A_VID = "a_Vid";
@@ -29,6 +31,7 @@ public class ArticleController {
     private static final String VID = "Vid";
     private static final String CURPAGE = "cur_page";
     private static final String ENCODER = "utf-8";
+    private static final String ADD = "发帖成功";
 
     @Autowired
     private IMoviesService service;
@@ -69,11 +72,19 @@ public class ArticleController {
         return COMMENT;
     }
 
-    @RequestMapping(value = "/add_article")
+    @RequestMapping(value = {"/add_article","/reply/Aid/{aid}"})
     public String addArticle(Article article,
                              Map map){
-        map.put("article",article);
-        aservice.addArticle(map);
+        //map.put("article",article);
+        //aservice.addArticle(map);
+        return COMMENT;
+    }
+
+    @RequestMapping(value = "/delete/Aid/{aid}")
+    public String deleteArticle(@PathVariable(value = "aid") int aid,
+                                Map map){
+        map.put("aid",aid);
+        aservice.deleteArticle(map);
         return COMMENT;
     }
 

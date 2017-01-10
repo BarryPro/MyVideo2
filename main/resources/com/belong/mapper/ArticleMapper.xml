@@ -12,6 +12,9 @@
                  column="uid"
                  select="QueryUserByUid"></association>
   </resultMap>
+  <delete id="deleteArticle" parameterType="map">
+    DELETE FROM article WHERE Aid = #{aid,jdbcType = INTEGER}
+  </delete>
 
   <select id="QueryUserByUid" resultMap="com.belong.dao.UserMapper.BaseResultMap">
     SELECT *

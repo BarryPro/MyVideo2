@@ -11,4 +11,5 @@ import java.util.Map;
 public interface IArticleService {
     void addArticle(Map map);
     ArrayList<Article> queryArticle(Map map);
+    void deleteArticle(Map map);
 }

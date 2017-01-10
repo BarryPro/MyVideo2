@@ -12,9 +12,9 @@
             <li>
                 <select name="row" id="my_select">
                     <option value="3">设置</option>
-                    <option value="4">04=rows</option>
-                    <option value="8">08=rows</option>
-                    <option value="12">12=rows</option>
+                    <option value="4">04==rows</option>
+                    <option value="8">08==rows</option>
+                    <option value="12">12==rows</option>
                 </select>
             </li>
         </ul>

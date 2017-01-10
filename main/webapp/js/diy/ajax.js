@@ -217,6 +217,11 @@ $(document).ready(function () {
         }
     });
 
+    //处理设置
+    $("#my_setting").click(function(){
+        _path = $("#_path").attr("value");//得到项目的绝对路径
+        location.href = _path+"/my_user/setting";
+    })
 });
 
 //获取电影界面

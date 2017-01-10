@@ -44,6 +44,7 @@ public class UserController {
     private static final String SYSTEMSEPARATOR = "/";
     private static final String HOME = "video/home.ftl";
     private static final String UPDATE = "修改成功";
+    private static final String SETTING = "video/setting.ftl";
 
     private HashMap<String,String> typep = new HashMap();
 
@@ -204,5 +205,10 @@ public class UserController {
         service.updateVideoNumber(map);
         map.put(MSG,UPDATE);
         return HOME;
+    }
+
+    @RequestMapping(value = "/setting")
+    public String setting(){
+        return SETTING;
     }
 }

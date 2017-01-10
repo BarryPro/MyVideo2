@@ -29,4 +29,9 @@ public class ArticleServiceImpl implements IArticleService{
     public ArrayList<Article> queryArticle(Map map) {
         return pdao.query(map);
     }
+
+    @Override
+    public void deleteArticle(Map map) {
+        dao.deleteArticle(map);
+    }
 }
