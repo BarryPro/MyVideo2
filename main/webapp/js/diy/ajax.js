@@ -245,7 +245,7 @@ function movie_page(i,list){
         '</label></p></li>' +
         '<li class="right-list">' +
         '<p class="views views-info">' +
-        '<a href="'+list.srcpath+'" download="'+list.srcpath+'">'+
+        '<a href="'+_path+'/'+list.vsrc+'" download="'+_path+'/'+list.vsrc+'">'+
         '<i class="fa fa-download" aria-hidden="true" title="下载"></i></a>&nbsp;&nbsp;'+list.views+'次播放</p></li>' +
         '</ul>' +
         '</div>' +

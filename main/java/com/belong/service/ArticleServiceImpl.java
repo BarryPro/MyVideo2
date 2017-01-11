@@ -34,4 +34,34 @@ public class ArticleServiceImpl implements IArticleService{
     public void deleteArticle(Map map) {
         dao.deleteArticle(map);
     }
+
+    @Override
+    public void updateArticle(Map map) {
+        dao.updateArticle(map);
+    }
+
+    @Override
+    public Article queryArticleByAid(Map map) {
+        return dao.queryArticleByAid(map);
+    }
+
+    @Override
+    public void updateAgree(Map map) {
+        dao.updataAgree(map);
+    }
+
+    @Override
+    public void updataDisagree(Map map) {
+        dao.updataDisagree(map);
+    }
+
+    @Override
+    public int queryAgree(Map map) {
+        return dao.queryAgree(map);
+    }
+
+    @Override
+    public int queryDisagree(Map map) {
+        return dao.queryDisagree(map);
+    }
 }

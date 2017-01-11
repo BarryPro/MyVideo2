@@ -1,5 +1,6 @@
 package com.belong.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.belong.model.Article;
 import com.belong.model.PageBean;
 import com.belong.model.Review;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -21,17 +24,17 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/my_review")
-@SessionAttributes(value = "review")
+@SessionAttributes(value = {"review","uid"})
 public class ArticleController {
     private static final String COMMENT = "video/comment.ftl";
     private static final String A_VID = "a_Vid";
     private static final String UID = "Uid";
-    private static final String ROOTID = "rootid";
     private static final String USERID = "userid";
     private static final String VID = "Vid";
     private static final String CURPAGE = "cur_page";
     private static final String ENCODER = "utf-8";
-    private static final String ADD = "发帖成功";
+
+    private boolean flag = true;
 
     @Autowired
     private IMoviesService service;
@@ -72,11 +75,11 @@ public class ArticleController {
         return COMMENT;
     }
 
-    @RequestMapping(value = {"/add_article","/reply/Aid/{aid}"})
+    @RequestMapping(value = "/add_article")
     public String addArticle(Article article,
                              Map map){
-        //map.put("article",article);
-        //aservice.addArticle(map);
+        map.put("article",article);
+        aservice.addArticle(map);
         return COMMENT;
     }
 
@@ -86,6 +89,72 @@ public class ArticleController {
         map.put("aid",aid);
         aservice.deleteArticle(map);
         return COMMENT;
+    }
+
+    @RequestMapping(value = "/reply")
+    public String reply(Article article,
+                             Map map){
+        String new_content = article.getAcontent();
+        map.put("article",article);
+        article = aservice.queryArticleByAid(map);
+        article.setAcontent(article.getAcontent()+new_content);
+        map.put("article",article);
+        aservice.updateArticle(map);
+        return COMMENT;
+    }
+
+    @RequestMapping(value = "/agree")
+    public String agree(@RequestParam("aid") int aid,
+                        @RequestParam("Uid") int uid,
+                        Map map,
+                        HttpServletResponse response){
+        if(flag){
+            map.put("aid",aid);
+            map.put("uid",uid);
+            aservice.updateAgree(map);
+            int num = queryAgree(map);
+            json(num,response);
+            flag = false;
+        }
+
+        return COMMENT;
+    }
+
+    @RequestMapping(value = "/disagree")
+    public String disagree(@RequestParam("aid") int aid,
+                           @RequestParam("Uid") int uid,
+                           Map map,
+                           HttpServletResponse response){
+        if(flag){
+            map.put("aid",aid);
+            map.put("uid",uid);
+            aservice.updataDisagree(map);
+            int num = queryDisagree(map);
+            json(num,response);
+            flag = false;
+        }
+
+        return COMMENT;
+    }
+
+    private int queryAgree(Map map){
+        return aservice.queryAgree(map);
+    }
+
+    private int queryDisagree(Map map){
+        return aservice.queryDisagree(map);
+    }
+
+    private void json(int num ,HttpServletResponse response){
+        try {
+            String json = JSON.toJSONString(num);
+            PrintWriter writer = response.getWriter();
+            writer.write(json);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

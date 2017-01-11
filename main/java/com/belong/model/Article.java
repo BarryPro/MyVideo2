@@ -5,7 +5,9 @@ public class Article {
 
     private Integer uid;
 
-    private Integer arootid;
+    private Integer agree;
+
+    private Integer disagree;
 
     private String adate;
 
@@ -14,6 +16,14 @@ public class Article {
     private User user;
 
     private String acontent;
+
+    public Integer getDisagree() {
+        return disagree;
+    }
+
+    public void setDisagree(Integer disagree) {
+        this.disagree = disagree;
+    }
 
     public User getUser() {
         return user;
@@ -39,12 +49,12 @@ public class Article {
         this.uid = uid;
     }
 
-    public Integer getArootid() {
-        return arootid;
+    public Integer getAgree() {
+        return agree;
     }
 
-    public void setArootid(Integer arootid) {
-        this.arootid = arootid;
+    public void setAgree(Integer arootid) {
+        this.agree = arootid;
     }
 
     public String getAdate() {

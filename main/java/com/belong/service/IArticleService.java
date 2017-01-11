@@ -12,4 +12,10 @@ public interface IArticleService {
     void addArticle(Map map);
     ArrayList<Article> queryArticle(Map map);
     void deleteArticle(Map map);
+    void updateArticle(Map map);
+    Article queryArticleByAid(Map map);
+    void updateAgree(Map map);
+    void updataDisagree(Map map);
+    int queryAgree(Map map);
+    int queryDisagree(Map map);
 }

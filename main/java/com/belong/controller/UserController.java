@@ -45,6 +45,7 @@ public class UserController {
     private static final String HOME = "video/home.ftl";
     private static final String UPDATE = "修改成功";
     private static final String SETTING = "video/setting.ftl";
+    private static final String COMMENT = "video/comment.ftl";
 
     private HashMap<String,String> typep = new HashMap();
 
@@ -61,7 +62,8 @@ public class UserController {
     @RequestMapping(value = "/login")
     public String login(User user,
                         Map map,
-                        @RequestParam(value="cookie",defaultValue = "off") String cookie,
+                        @RequestParam(value = "action") int action,
+                        @RequestParam(value = "cookie",defaultValue = "off") String cookie,
                         HttpServletResponse response){
         String msg;
         String cookiePWD = user.getPassword();
@@ -82,11 +84,17 @@ public class UserController {
             msg = FAILED;
         }
         map.put(MSG,msg);
-        return HOME;
+        if(action == 0){
+            return HOME;
+        } else {
+            return COMMENT;
+        }
+
     }
 
     @RequestMapping(value = "/logout")
-    public String logout(SessionStatus sessionStatus, Map map){
+    public String logout(SessionStatus sessionStatus,
+                         Map map){
         //注销当前的session
         sessionStatus.setComplete();
         map.put(MSG,LOGOUT);

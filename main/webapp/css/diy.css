@@ -90,3 +90,22 @@
     width: 200px;
     height: 200px;
 }
+._articleImg{
+    position: relative;
+    padding-left: 0px;
+    padding-bottom: 0px;
+}
+._articlefont{
+    font-size: 2px;
+}
+
+._articlelayout {
+    color: #ccc;
+    position: relative;
+    padding-left: 540px;
+    padding-bottom: 0px;
+}
+.fontuser{
+    color: #791e25;
+    font-weight: bold;
+}

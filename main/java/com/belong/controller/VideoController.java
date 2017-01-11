@@ -44,7 +44,6 @@ public class VideoController {
     private static final String MOVIES = "movies";
     private static final String UPLOADSUCCESS = "上传成功";
     private static final String MSG = "msg";
-    private static final String COMMENT = "video/comment.ftl";
 
     private HashMap<String,String> typep = new HashMap();
     private HashMap<String,String> typem = new HashMap();

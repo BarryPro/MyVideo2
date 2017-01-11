@@ -4,7 +4,8 @@
   <resultMap id="BaseResultMap" type="com.belong.model.Article" >
     <id column="Aid" property="aid" jdbcType="INTEGER" />
     <result column="Uid" property="uid" jdbcType="INTEGER" />
-    <result column="Arootid" property="arootid" jdbcType="INTEGER" />
+    <result column="Agree" property="agree" jdbcType="INTEGER" />
+    <result column="Disagree" property="disagree" jdbcType="INTEGER" />
     <result column="Adate" property="adate" jdbcType="TIMESTAMP" />
     <result column="Vid" property="vid" jdbcType="INTEGER" />
     <result column="Acontent" property="acontent" jdbcType="LONGVARCHAR" />
@@ -12,6 +13,17 @@
                  column="uid"
                  select="QueryUserByUid"></association>
   </resultMap>
+  <update id="updateArticle" parameterType="map">
+    UPDATE article SET Acontent = #{article.acontent,jdbcType=LONGVARCHAR}
+    WHERE Aid = #{article.aid,jdbcType = INTEGER}
+  </update>
+  <update id="updataAgree" parameterType="map">
+    UPDATE article SET Agree = Agree + 1 WHERE Aid = #{aid,jdbcType = INTEGER}
+  </update>
+
+  <update id="updataDisagree" parameterType="map">
+    UPDATE article SET Disagree = Disagree + 1 WHERE Aid = #{aid,jdbcType = INTEGER}
+  </update>
   <delete id="deleteArticle" parameterType="map">
     DELETE FROM article WHERE Aid = #{aid,jdbcType = INTEGER}
   </delete>
@@ -20,6 +32,17 @@
     SELECT *
     FROM user
     WHERE id = #{uid,jdbcType = INTEGER}
+  </select>
+  <select id="queryArticleByAid" resultType="com.belong.model.Article" parameterType="map">
+    SELECT * FROM article WHERE Aid = #{article.aid,jdbcType=INTEGER}
+  </select>
+
+  <select id="queryAgree" resultType="Integer" parameterType="map">
+    SELECT Agree FROM article WHERE Aid = #{aid,jdbcType=INTEGER}
+  </select>
+
+  <select id="queryDisagree" resultType="Integer" parameterType="map">
+    SELECT Disagree FROM article WHERE Aid = #{aid,jdbcType=INTEGER}
   </select>
 
   <insert id="addArticle" parameterType="map">
